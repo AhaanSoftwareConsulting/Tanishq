@@ -31,7 +31,7 @@ const Header = () => {
       <div className="relative mx-auto flex h-[64px] w-full max-w-[1400px] items-center justify-between rounded-full bg-[#603912] px-3 shadow-lg sm:h-[76px] sm:px-5 lg:h-[110px] lg:px-5">
 
         {/* Left Navigation - Desktop */}
-        <nav className="hidden items-center gap-[10px] lg:flex">
+        <nav className="hidden items-center gap-[16px] lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
