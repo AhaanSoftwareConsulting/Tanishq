@@ -20,7 +20,6 @@ const NewOpening = () => {
             New Opening
           </h2>
 
-          <div className="mx-auto mt-4 h-[2px] w-14 bg-[#A66B3F]" />
 
           <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#735D4D] sm:text-base">
             Bringing the authentic taste of India to a new destination.
