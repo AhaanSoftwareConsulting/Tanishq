@@ -8,6 +8,7 @@ import GuestReviews from './components/GuestReviews'
 import AuthenticFlavours from './components/AuthenticFlavours'
 import RestaurantGlimpse from './components/RestaurantGlimpse'
 import OurStorySection from './components/OurStorySection'
+import NewOpening from './components/NewOpening'
 
 const HomeComponents = () => {
   return (
@@ -16,6 +17,7 @@ const HomeComponents = () => {
         <WelcomeSection/>
         <AuthenticFlavours/>
         <OurStorySection/>
+        <NewOpening/>
         <MenuCategories/>
         <VegetarianDining/>
         <RestaurantGlimpse/>

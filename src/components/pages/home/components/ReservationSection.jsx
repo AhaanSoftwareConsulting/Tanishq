@@ -19,23 +19,29 @@ const ReservationSection = () => {
       phone: "",
       date: "",
       guests: "",
+      branch: "",
       message: "",
     },
   });
 
+  // Minimum reservation date: today
   const today = new Date();
+
   const minDate = [
     today.getFullYear(),
     String(today.getMonth() + 1).padStart(2, "0"),
     String(today.getDate()).padStart(2, "0"),
   ].join("-");
 
+  // Handle reservation form submission
   const onSubmit = async (data) => {
     setSubmitMessage("");
 
     try {
-      // Replace this with your reservation API.
+      // Includes the selected branch.
       console.log("Reservation Details:", data);
+
+      // TODO: Replace with your reservation API request.
 
       setSubmitMessage(
         "Your reservation request has been submitted successfully!"
@@ -77,7 +83,10 @@ const ReservationSection = () => {
     "mt-2 font-['Work_Sans'] text-[12px] text-red-600";
 
   return (
-    <section className="w-full bg-[#F5EFE5] px-4 py-[60px] sm:px-6 sm:py-[70px] lg:px-8 lg:py-[78px]">
+    <section
+      id="reserve-table"
+      className="w-full bg-[#F5EFE5] px-4 py-[60px] sm:px-6 sm:py-[70px] lg:px-8 lg:py-[78px]"
+    >
       <div className="mx-auto w-full max-w-[1400px]">
 
         {/* Section Heading */}
@@ -112,9 +121,7 @@ const ReservationSection = () => {
           "
         >
 
-          {/* ========================================
-              LEFT COLUMN
-          ======================================== */}
+          {/* LEFT COLUMN */}
           <div className="flex min-w-0 flex-col gap-[28px]">
 
             {/* Contact Information Card */}
@@ -256,12 +263,13 @@ const ReservationSection = () => {
                 overflow-hidden
                 sm:h-[380px]
                 lg:h-[422px]
-                xl:h-[422px]
+                xl:h-[525px]
               "
             >
               <img
                 src={reservationImage}
                 alt="Delicious Indian vegetarian food"
+                loading="lazy"
                 className="
                   absolute
                   inset-0
@@ -279,9 +287,7 @@ const ReservationSection = () => {
 
           </div>
 
-          {/* ========================================
-              RIGHT COLUMN: RESERVATION FORM
-          ======================================== */}
+          {/* RIGHT COLUMN: RESERVATION FORM */}
           <div className="min-w-0 bg-white p-5 sm:p-7 lg:p-[22px] xl:p-[22px]">
 
             <form
@@ -291,7 +297,16 @@ const ReservationSection = () => {
             >
 
               {/* Name and Phone */}
-              <div className="grid grid-cols-1 gap-x-[30px] gap-y-[28px] sm:grid-cols-2 lg:gap-x-[30px]">
+              <div
+                className="
+                  grid
+                  grid-cols-1
+                  gap-x-[30px]
+                  gap-y-[28px]
+                  sm:grid-cols-2
+                  lg:gap-x-[30px]
+                "
+              >
 
                 {/* Name */}
                 <div className="min-w-0">
@@ -321,7 +336,7 @@ const ReservationSection = () => {
                   />
 
                   {errors.name && (
-                    <p className={errorClass}>
+                    <p className={errorClass} role="alert">
                       {errors.name.message}
                     </p>
                   )}
@@ -345,8 +360,7 @@ const ReservationSection = () => {
                     autoComplete="tel"
                     aria-invalid={Boolean(errors.phone)}
                     {...register("phone", {
-                      required:
-                        "Please enter your phone number.",
+                      required: "Please enter your phone number.",
                       pattern: {
                         value: /^[+]?[\d\s()-]{7,20}$/,
                         message:
@@ -357,7 +371,7 @@ const ReservationSection = () => {
                   />
 
                   {errors.phone && (
-                    <p className={errorClass}>
+                    <p className={errorClass} role="alert">
                       {errors.phone.message}
                     </p>
                   )}
@@ -390,7 +404,7 @@ const ReservationSection = () => {
                   />
 
                   {errors.date && (
-                    <p className={errorClass}>
+                    <p className={errorClass} role="alert">
                       {errors.date.message}
                     </p>
                   )}
@@ -432,8 +446,60 @@ const ReservationSection = () => {
                   />
 
                   {errors.guests && (
-                    <p className={errorClass}>
+                    <p className={errorClass} role="alert">
                       {errors.guests.message}
+                    </p>
+                  )}
+
+                </div>
+
+                {/* NEW: Select Branch */}
+                <div className="min-w-0 sm:col-span-2">
+
+                  <label
+                    htmlFor="reservation-branch"
+                    className={labelClass}
+                  >
+                    Select Branch
+                  </label>
+
+                  <select
+                    id="reservation-branch"
+                    aria-invalid={Boolean(errors.branch)}
+                    {...register("branch", {
+                      required: "Please select a restaurant branch.",
+                      validate: (value) =>
+                        ["ho-chi-minh", "da-nang"].includes(value) ||
+                        "Please select a valid restaurant branch.",
+                    })}
+                    className={`
+                      ${inputClass}
+                      cursor-pointer
+                      [color-scheme:light]
+                      ${
+                        errors.branch
+                          ? "border-red-500"
+                          : ""
+                      }
+                    `}
+                  >
+                    <option value="">
+                      Choose a branch
+                    </option>
+
+                    <option value="ho-chi-minh">
+                      Ho Chi Minh City
+                    </option>
+
+                    <option value="da-nang">
+                      Da Nang City
+                    </option>
+
+                  </select>
+
+                  {errors.branch && (
+                    <p className={errorClass} role="alert">
+                      {errors.branch.message}
                     </p>
                   )}
 
@@ -490,7 +556,7 @@ const ReservationSection = () => {
                 />
 
                 {errors.message && (
-                  <p className={errorClass}>
+                  <p className={errorClass} role="alert">
                     {errors.message.message}
                   </p>
                 )}
