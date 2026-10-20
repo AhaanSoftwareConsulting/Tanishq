@@ -77,18 +77,27 @@ const NewOpening = () => {
 
               </div>
 
-              {/* NEW OPENING BADGE */}
-              <div className="absolute -right-2 -top-4 z-10 flex h-[76px] w-[76px] items-center justify-center bg-[#35251B] text-center text-white sm:-right-3 sm:-top-5 sm:h-[88px] sm:w-[88px]"
-                style={{
-                  clipPath:
-                    "polygon(50% 0%, 61% 8%, 75% 4%, 81% 17%, 95% 22%, 92% 36%, 100% 50%, 92% 62%, 96% 77%, 81% 82%, 75% 96%, 61% 92%, 50% 100%, 39% 92%, 25% 96%, 19% 82%, 5% 77%, 8% 62%, 0% 50%, 8% 36%, 4% 22%, 19% 17%, 25% 4%, 39% 8%)",
-                }}
-              >
-                <span className="font-serif text-[11px] leading-4 sm:text-xs">
-                  New
-                  <br />
-                  Opening
-                </span>
+              {/* NEW OPENING BADGE CONTAINER */}
+              <div className="absolute -right-2 -top-4 z-10 sm:-right-3 sm:-top-5">
+                
+                {/* 1. Rotating Chorka (Background Star Shape spins fast) */}
+                <div 
+                  className="flex h-[76px] w-[76px] items-center justify-center bg-[#35251B] sm:h-[88px] sm:w-[88px] animate-[spin_8s_linear_infinite]"
+                  style={{
+                    clipPath:
+                      "polygon(50% 0%, 61% 8%, 75% 4%, 81% 17%, 95% 22%, 92% 36%, 100% 50%, 92% 62%, 96% 77%, 81% 82%, 75% 96%, 61% 92%, 50% 100%, 39% 92%, 25% 96%, 19% 82%, 5% 77%, 8% 62%, 0% 50%, 8% 36%, 4% 22%, 19% 17%, 25% 4%, 39% 8%)",
+                  }}
+                ></div>
+
+                {/* 2. Static Text (Stays completely fixed in place) */}
+                <div className="absolute inset-0 flex items-center justify-center text-center text-white pointer-events-none">
+                  <span className="font-['Work_Sans'] text-[13px] font-semibold leading-4 sm:text-xs">
+                    New
+                    <br />
+                    Opening
+                  </span>
+                </div>
+
               </div>
 
               {/* BOTTOM CAPTION */}
