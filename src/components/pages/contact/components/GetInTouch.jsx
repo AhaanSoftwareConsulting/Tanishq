@@ -9,7 +9,7 @@ const contactCards = [
     buttonLabel: "Call Now",
     Icon: Phone,
     iconWeight: "fill",
-    href: "tel:+84000000000", // TODO: replace with real phone number
+    href: "tel: +8475019036", // TODO: replace with real phone number
   },
   {
     title: "Email Us",
@@ -25,7 +25,7 @@ const contactCards = [
     buttonLabel: "View Locations",
     Icon: MapPin,
     iconWeight: "regular",
-    to: "/locations", // internal route
+    to: "#", // internal route
   },
 ];
 
