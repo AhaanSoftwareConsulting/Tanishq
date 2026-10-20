@@ -4,6 +4,7 @@ import WelcomeSection from '../home/components/WelcomeSection'
 import OurStorySection from '../home/components/OurStorySection'
 import VegetarianDining from '../home/components/VegetarianDining'
 import GuestReviews from '../home/components/GuestReviews'
+import Destinations from './components/Destinations'
 
 const AboutComponents = () => {
   return (
@@ -11,7 +12,7 @@ const AboutComponents = () => {
         <AboutBanner/>
         <WelcomeSection/>
         <OurStorySection/>
-        <VegetarianDining/>
+        <Destinations/>
         <GuestReviews/>
     </main>
   )

@@ -1,116 +1,125 @@
 import React from "react";
-import { ArrowUpRight, MapPin } from "@phosphor-icons/react";
+import { ArrowUpRight } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
-// Import image from assets folder
 import DaNangRestaurant from "../../../../assets/da-nang-restaurant.jpg";
 
 const NewOpening = () => {
   return (
-    <section className="bg-[#F7ECDD] px-4 py-14 sm:px-6 md:py-20 lg:px-12">
+    <section className="overflow-hidden bg-[#F8ECDD] px-5 py-14 sm:px-8 md:py-16 lg:px-12 lg:py-20">
       <div className="mx-auto max-w-7xl">
 
-        {/* Section Heading */}
-        <div className="mb-8 text-center md:mb-12">
-          <span className="mb-3 inline-block text-[10px] font-medium uppercase tracking-[0.3em] text-[#98643D] sm:text-xs">
-            A New Chapter Begins
-          </span>
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-8 lg:gap-16">
 
-          <h2 className="font-serif text-3xl font-semibold text-[#432819] sm:text-4xl md:text-5xl">
-            New Opening
-          </h2>
+          {/* LEFT CONTENT */}
+          <div className="order-2 md:order-1">
 
+            <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
+              New Opening
+            </h2>
 
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#735D4D] sm:text-base">
-            Bringing the authentic taste of India to a new destination.
-            Discover our newest restaurant in Da Nang and experience
-            the warmth, flavours, and hospitality you love.
-          </p>
-        </div>
+            <p className="mt-3 text-lg text-[#6D472B] sm:text-xl font-['Fraunces']">
+              Da Nang City, Vietnam
+            </p>
 
-        {/* Main Content */}
-        <div className="grid overflow-hidden rounded-sm bg-[#A56839] md:grid-cols-2">
-
-          {/* Restaurant Image */}
-          <div className="group relative min-h-[280px] overflow-hidden sm:min-h-[380px] md:min-h-[460px]">
-            <img
-              src={DaNangRestaurant}
-              alt="Tanishq Indian Restaurant in Da Nang"
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-[#24150D]/70 via-transparent to-transparent" />
-
-            <div className="absolute bottom-6 left-6 text-white sm:bottom-8 sm:left-8">
-              <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.2em]">
-                <MapPin size={16} weight="fill" />
-                Da Nang, Vietnam
-              </div>
-
-              <h3 className="font-serif text-2xl font-medium sm:text-3xl">
-                A New Home for
-                <br />
-                Indian Flavours
-              </h3>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="flex flex-col justify-center px-6 py-10 text-center sm:px-10 sm:py-14 md:px-12 lg:px-16">
-
-            <span className="mb-4 text-[10px] uppercase tracking-[0.25em] text-[#F4D9B5] sm:text-xs">
-              Now Welcoming You
-            </span>
-
-            <h3 className="font-serif text-3xl leading-tight text-[#FFF7EB] sm:text-4xl lg:text-5xl">
-              Namaste,
-              <br />
-              Da Nang!
-            </h3>
-
-            <p className="mx-auto mt-6 max-w-md text-sm leading-7 text-[#F8E8D6] sm:text-base">
+            <p className="mt-5 max-w-md text-sm leading-7 text-[#88796B] sm:text-[16px] font-['Work_Sans']">
               Our love for Indian cuisine is travelling to Da Nang.
               Join us for comforting classics, aromatic spices, and
               memorable dining moments made to be shared.
             </p>
 
-            {/* Action Buttons */}
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            {/* BUTTONS */}
+            <div className="mt-7 flex flex-wrap items-center gap-3">
 
               <Link
                 to="/menu"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#F8ECDD] px-6 py-3 text-xs font-semibold tracking-wide text-[#432819] transition-colors duration-300 hover:bg-white sm:text-sm"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#694018] px-5 py-3 text-xs font-medium text-white transition-all duration-300 hover:bg-[#4D2D13]"
               >
                 Check Menu
 
                 <ArrowUpRight
-                  size={16}
+                  size={15}
                   weight="bold"
-                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </Link>
 
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-[#F8ECDD]/70 px-6 py-3 text-xs font-semibold tracking-wide text-[#FFF7EB] transition-colors duration-300 hover:bg-[#F8ECDD] hover:text-[#432819] sm:text-sm"
+                className="group inline-flex items-center gap-2 rounded-full border border-[#B99A79] px-5 py-3 text-xs font-medium text-[#694018] transition-all duration-300 hover:bg-[#694018] hover:text-white"
               >
                 Reserve Table
 
                 <ArrowUpRight
-                  size={16}
+                  size={15}
                   weight="bold"
-                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </Link>
 
             </div>
+          </div>
 
-            <p className="mt-7 text-[10px] tracking-[0.15em] text-[#F4D9B5] sm:text-xs">
-              AUTHENTIC INDIAN CUISINE · HEARTFELT HOSPITALITY
-            </p>
+          {/* RIGHT IMAGE SECTION */}
+          <div className="order-1 min-w-0 md:order-2">
+
+            <div className="relative">
+
+              {/* Main Restaurant Image */}
+              <div className="relative aspect-[1.22/1] overflow-hidden sm:aspect-[1.3/1]">
+
+                <img
+                  src={DaNangRestaurant}
+                  alt="Indian restaurant in Da Nang, Vietnam"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+
+              </div>
+
+              {/* NEW OPENING BADGE */}
+              <div className="absolute -right-2 -top-4 z-10 flex h-[76px] w-[76px] items-center justify-center bg-[#35251B] text-center text-white sm:-right-3 sm:-top-5 sm:h-[88px] sm:w-[88px]"
+                style={{
+                  clipPath:
+                    "polygon(50% 0%, 61% 8%, 75% 4%, 81% 17%, 95% 22%, 92% 36%, 100% 50%, 92% 62%, 96% 77%, 81% 82%, 75% 96%, 61% 92%, 50% 100%, 39% 92%, 25% 96%, 19% 82%, 5% 77%, 8% 62%, 0% 50%, 8% 36%, 4% 22%, 19% 17%, 25% 4%, 39% 8%)",
+                }}
+              >
+                <span className="font-serif text-[11px] leading-4 sm:text-xs">
+                  New
+                  <br />
+                  Opening
+                </span>
+              </div>
+
+              {/* BOTTOM CAPTION */}
+              <div className="mt-3 flex items-start justify-between gap-3 sm:mt-4">
+
+                <p className="flex-1 pl-1 font-serif text-xl italic leading-6 text-[#A68A6D] sm:text-2xl" style={{ fontFamily: "'Rustic Roadway - Personal use', cursive, sans-serif" }}>
+                  A New Home for Indian Flavours
+                  <br />
+                  <span className="text-lg sm:text-xl">
+                    Da Nang, Vietnam.
+                  </span>
+                </p>
+
+                {/* Small Food Image Placeholder */}
+                <div className="relative -mt-10 w-[105px] shrink-0 rotate-[5deg] border-[4px] border-white bg-white shadow-md sm:-mt-12 sm:w-[125px]">
+
+                  <img
+                    src={DaNangRestaurant}
+                    alt="Indian cuisine"
+                    loading="lazy"
+                    className="aspect-square w-full object-cover"
+                  />
+
+                </div>
+
+              </div>
+
+            </div>
 
           </div>
+
         </div>
       </div>
     </section>

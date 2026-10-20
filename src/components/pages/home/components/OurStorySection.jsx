@@ -10,7 +10,7 @@ const OurStorySection = () => {
       <div className="max-w-[1600px] mx-auto text-center">
         
         {/* Header Title */}
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 tracking-wide text-[#331d0d]">
+        <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
           A Taste of Home, Shared with Vietnam
         </h2>
 

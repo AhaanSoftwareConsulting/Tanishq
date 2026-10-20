@@ -54,7 +54,7 @@ const GuestReviews = () => {
         {/* Header Section with Navigation Arrows */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
-            <h2 className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-[#331d0d]">
+            <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
               Loved by Our Guests
             </h2>
           </div>

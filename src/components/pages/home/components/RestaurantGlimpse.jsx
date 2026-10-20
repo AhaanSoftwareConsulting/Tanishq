@@ -49,7 +49,7 @@ const RestaurantGlimpse = () => {
       <div className="max-w-[1400px] mx-auto text-center">
         
         {/* Header Title */}
-        <h2 className="font-serif text-3xl md:text-5xl font-semibold tracking-wide mb-6">
+        <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px] mb-6">
           A Little Glimpse of Us
         </h2>
 

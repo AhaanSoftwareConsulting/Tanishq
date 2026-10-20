@@ -127,10 +127,10 @@ const AuthenticFlavours = () => {
         
         {/* Header Section */}
         <div className="text-center mb-10">
-          <h2 className="font-serif text-3xl md:text-5xl font-semibold mb-3 tracking-wide text-[#331d0d]">
+          <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
             A Feast of Authentic Flavours
           </h2>
-          <p className="text-xs md:text-sm text-[#735d4d] max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs font-['Work_Sans'] md:text-sm text-[#735d4d] max-w-xl mx-auto leading-relaxed">
             From rich regional specialities to comforting everyday favourites, discover the flavours that make Indian vegetarian cuisine so memorable.
           </p>
         </div>

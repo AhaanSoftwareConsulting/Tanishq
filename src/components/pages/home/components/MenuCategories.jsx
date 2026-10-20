@@ -64,7 +64,7 @@ const MenuCategories = () => {
       <div className="max-w-[1400px] mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-5xl font-semibold mb-4 tracking-wide text-[#331d0d]">
+          <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
             Something for Every Craving
           </h2>
           <p className="text-sm md:text-base text-[#735d4d] max-w-xl mx-auto leading-relaxed">
