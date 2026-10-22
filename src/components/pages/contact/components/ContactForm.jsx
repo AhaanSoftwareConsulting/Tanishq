@@ -372,6 +372,7 @@ const ContactForm = () => {
                     type="submit"
                     disabled={isSubmitting}
                     className="
+                      cursor-pointer
                       inline-flex
                       min-h-[62px]
                       w-full

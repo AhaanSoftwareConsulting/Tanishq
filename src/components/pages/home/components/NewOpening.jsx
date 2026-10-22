@@ -7,7 +7,7 @@ import DaNangRestaurant from "../../../../assets/da-nang-restaurant.jpg";
 const NewOpening = () => {
   return (
     <section className="overflow-hidden bg-[#F8ECDD] px-5 py-14 sm:px-8 md:py-16 lg:px-12 lg:py-20">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1400px]">
 
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-8 lg:gap-16">
 
