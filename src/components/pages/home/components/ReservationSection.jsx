@@ -122,7 +122,7 @@ const ReservationSection = () => {
               </div>
 
               <div className="mt-[28px]">
-                <button type="submit" disabled={isSubmitting} className="inline-flex min-h-[62px] items-center justify-center rounded-full bg-[#603912] px-[34px] py-[16px] font-['Work_Sans'] text-[16px] font-medium text-white transition-all duration-300 hover:bg-[#855426] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#BD8747] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60">{isSubmitting ? "Submitting..." : "Request Reservation"}</button>
+                <button type="submit" disabled={isSubmitting} className=" cursor-pointer inline-flex min-h-[62px] items-center justify-center rounded-full bg-[#603912] px-[34px] py-[16px] font-['Work_Sans'] text-[16px] font-medium text-white transition-all duration-300 hover:bg-[#855426] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#BD8747] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60">{isSubmitting ? "Submitting..." : "Request Reservation"}</button>
               </div>
 
               {submitMessage && <p role="status" aria-live="polite" className={`mt-4 font-['Work_Sans'] text-[14px] leading-relaxed ${submitError ? "text-red-600" : "text-[#70451F]"}`}>{submitMessage}</p>}
