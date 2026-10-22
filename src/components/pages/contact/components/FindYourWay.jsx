@@ -23,7 +23,7 @@ const BranchButton = ({ branch, isActive, onSelect }) => (
     role="tab"
     aria-selected={isActive}
     onClick={() => onSelect(branch.id)}
-    className={`inline-flex h-[52px] items-center justify-center gap-2.5 rounded-full border px-7 font-sans text-[15px] font-medium transition-colors duration-300 lg:h-[60px] lg:min-w-[200px] lg:px-8 ${
+    className={`cursor-pointer inline-flex h-[52px] items-center justify-center gap-2.5 rounded-full border px-7 font-sans text-[15px] font-medium transition-colors duration-300 lg:h-[60px] lg:min-w-[200px] lg:px-8 ${
       isActive
         ? "border-[#5E3A17] bg-[#5E3A17] text-white"
         : "border-[#8C6A48] bg-transparent text-[#5E3A17] hover:bg-[#5E3A17] hover:text-white"
