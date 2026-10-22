@@ -1,470 +1,154 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { getGalleries } from "../../../../api/wordpressApi";
 
-const galleryImages = [
-  {
-    id: 1,
-    title: "Traditional Indian Thali",
-    category: "Indian Cuisine",
-    image:
-      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    id: 2,
-    title: "Fresh Vegetarian Delights",
-    category: "Vegetarian Food",
-    image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 3,
-    title: "A Taste of India",
-    category: "Indian Specialties",
-    image:
-      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 4,
-    title: "Fresh Garden Salad",
-    category: "Healthy Choices",
-    image:
-      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 5,
-    title: "Restaurant Experience",
-    category: "Our Ambience",
-    image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 6,
-    title: "Delicious Curry",
-    category: "Chef's Special",
-    image:
-      "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 7,
-    title: "Beautiful Dining",
-    category: "Restaurant Interior",
-    image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85",
-  },
-
-  // Additional Gallery Images
-  {
-    id: 8,
-    title: "Authentic Indian Flavours",
-    category: "Indian Cuisine",
-    image:
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    id: 9,
-    title: "Fresh Mediterranean Salad",
-    category: "Healthy Choices",
-    image:
-      "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 10,
-    title: "Delicious Pasta",
-    category: "Vegetarian Specials",
-    image:
-      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 11,
-    title: "Freshly Baked Pizza",
-    category: "Chef's Special",
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 12,
-    title: "Delightful Desserts",
-    category: "Sweet Moments",
-    image:
-      "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    id: 13,
-    title: "Elegant Restaurant Interior",
-    category: "Restaurant Ambience",
-    image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    id: 15,
-    title: "Fresh and Healthy Bowls",
-    category: "Healthy Food",
-    image:
-      "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=900&q=85",
-  },
+const categories = [
+  { label: "All", value: "all" },
+  { label: "Ho Chi Minh City", value: "ho-chi-minh" },
+  { label: "Da Nang City", value: "da-nang" },
 ];
 
 const OurGallery = () => {
-  const [activeImage, setActiveImage] = useState(null);
+  const [galleries, setGalleries] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Close image preview using Escape key
   useEffect(() => {
-    if (!activeImage) return;
+    const fetchGallery = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setActiveImage(null);
+        const data = await getGalleries();
+
+        const formattedData = data.map((item) => ({
+          id: item.id,
+          title: item.title?.rendered || "Gallery Image",
+          category: item.acf?.gallery_category || "ho-chi-minh",
+          image: item._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "",
+          alt: item._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || item.title?.rendered || "Gallery Image",
+        }));
+
+        setGalleries(formattedData.filter((item) => item.image));
+      } catch (err) {
+        console.error("Gallery fetch error:", err);
+        setError("Unable to load gallery images. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    fetchGallery();
+  }, []);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeImage]);
-
-  // Prevent background scrolling while preview is open
-  useEffect(() => {
-    if (!activeImage) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [activeImage]);
-
-  const labelClass = `
-    mb-2
-    block
-    font-['Work_Sans']
-    text-[10px]
-    font-medium
-    uppercase
-    tracking-[2px]
-    text-[#E9C18D]
-    sm:text-[11px]
-  `;
+  const filteredGalleries = galleries.filter(
+    (item) => activeCategory === "all" || item.category === activeCategory
+  );
 
   return (
-    <section
-      id="gallery"
-      className="
-        w-full
-        overflow-hidden
-        bg-white
-        px-4
-        py-[60px]
-        sm:px-6
-        sm:py-[75px]
-        lg:px-8
-        lg:py-[100px]
-      "
-    >
-      <div className="mx-auto w-full max-w-[1400px]">
-
-        {/* Section Heading */}
-        <div
-          className="
-            mx-auto
-            mb-[35px]
-            max-w-[700px]
-            text-center
-            sm:mb-[48px]
-            lg:mb-[60px]
-          "
-        >
-          <h2
-            className="
-              font-['Fraunces']
-              text-[36px]
-              font-normal
-              leading-[1.15]
-              text-[#70451F]
-              sm:text-[46px]
-              md:text-[52px]
-              lg:text-[62px]
-            "
-          >
+    <section className="bg-[#F7ECDD] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-3 font-['Work_Sans'] text-sm font-semibold uppercase tracking-[3px] text-[#8B5E34]">
+            Our Moments
+          </p>
+          <h2 className="font-['Fraunces'] text-4xl font-medium text-[#2F2116] sm:text-5xl lg:text-6xl">
             Our Gallery
           </h2>
-
-          <p
-            className="
-              mx-auto
-              mt-[18px]
-              max-w-[560px]
-              font-['Work_Sans']
-              text-[14px]
-              leading-[1.9]
-              text-[#7A7167]
-              sm:text-[16px]
-            "
-          >
-            Take a glimpse into our world of authentic flavours,
-            fresh ingredients, beautiful dishes, and memorable
-            dining experiences.
+          <p className="mx-auto mt-4 max-w-2xl font-['Work_Sans'] text-base leading-7 text-[#6B5745] md:text-lg">
+            Explore our delicious vegetarian dishes and memorable dining
+            experiences at our restaurant branches.
           </p>
         </div>
 
-        {/* Masonry Gallery */}
-        <div
-          className="
-            columns-1
-            gap-5
-            sm:columns-2
-            lg:columns-3
-            lg:gap-6
-          "
-        >
-          {galleryImages.map((item) => (
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
+          {categories.map((category) => (
             <button
-              key={item.id}
+              key={category.value}
               type="button"
-              onClick={() => setActiveImage(item)}
-              aria-label={`View ${item.title}`}
-              className="
-                group
-                relative
-                mb-5
-                block
-                w-full
-                break-inside-avoid
-                overflow-hidden
-                bg-[#E8DCCB]
-                text-left
-                focus:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#BD8747]
-                lg:mb-6
-              "
+              onClick={() => setActiveCategory(category.value)}
+              className={`rounded-full border px-6 py-3 font-['Work_Sans'] text-sm font-medium transition-all duration-300 md:text-base ${
+                activeCategory === category.value
+                  ? "border-[#603912] bg-[#603912] text-white"
+                  : "border-[#603912]/30 bg-transparent text-[#603912] hover:border-[#603912] hover:bg-[#603912] hover:text-white"
+              }`}
             >
-              {/* Gallery Image */}
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                className="
-                  block
-                  h-auto
-                  w-full
-                  object-cover
-                  transition-transform
-                  duration-700
-                  ease-out
-                  group-hover:scale-105
-                "
-              />
-
-              {/* Image Overlay */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-gradient-to-t
-                  from-black/75
-                  via-black/10
-                  to-transparent
-                  opacity-80
-                  transition-opacity
-                  duration-500
-                  group-hover:opacity-100
-                "
-              />
-
-              {/* Image Content */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-x-0
-                  bottom-0
-                  flex
-                  items-end
-                  justify-between
-                  gap-3
-                  p-4
-                  sm:p-5
-                  lg:p-6
-                "
-              >
-                <div className="min-w-0">
-                  <span className={labelClass}>
-                    {item.category}
-                  </span>
-
-                  <h3
-                    className="
-                      font-['Fraunces']
-                      text-[20px]
-                      font-medium
-                      leading-[1.3]
-                      text-white
-                      sm:text-[22px]
-                      lg:text-[24px]
-                    "
-                  >
-                    {item.title}
-                  </h3>
-                </div>
-
-                {/* View Icon */}
-                <span
-                  className="
-                    flex
-                    h-[40px]
-                    w-[40px]
-                    shrink-0
-                    translate-y-2
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-white
-                    text-[#603912]
-                    opacity-0
-                    transition-all
-                    duration-300
-                    group-hover:translate-y-0
-                    group-hover:opacity-100
-                    group-focus-visible:translate-y-0
-                    group-focus-visible:opacity-100
-                  "
-                >
-                  <ArrowUpRight size={21} weight="regular" />
-                </span>
-              </div>
+              {category.label}
             </button>
           ))}
         </div>
 
-        {/* Bottom Description */}
-        <div
-          className="
-            mt-[35px]
-            text-center
-            sm:mt-[45px]
-            lg:mt-[55px]
-          "
-        >
-          <p
-            className="
-              font-['Work_Sans']
-              text-[13px]
-              leading-[1.8]
-              text-[#7A7167]
-              sm:text-[14px]
-            "
-          >
-            Fresh ingredients. Authentic flavours. Beautiful
-            moments.
+        {loading ? (
+          <div className="py-16 text-center">
+            <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#603912]/20 border-t-[#603912]" />
+            <p className="mt-4 font-['Work_Sans'] text-[#603912]">
+              Loading gallery...
+            </p>
+          </div>
+        ) : error ? (
+          <p className="py-12 text-center font-['Work_Sans'] text-red-700">
+            {error}
           </p>
-        </div>
+        ) : filteredGalleries.length === 0 ? (
+          <p className="py-12 text-center font-['Work_Sans'] text-[#603912]">
+            No gallery images found for this category.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredGalleries.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setSelectedImage(item)}
+                className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-[#E9D9C4] text-left"
+                aria-label={`View ${item.title}`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-5 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
+                  <h3
+                    className="font-['Fraunces'] text-xl font-medium text-white md:text-2xl"
+                    dangerouslySetInnerHTML={{ __html: item.title }}
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Image Preview Modal */}
-      {activeImage && (
+      {selectedImage && (
         <div
-          className="
-            fixed
-            inset-0
-            z-[100]
-            flex
-            items-center
-            justify-center
-            bg-black/90
-            p-4
-            sm:p-8
-          "
-          onClick={() => setActiveImage(null)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4"
+          onClick={() => setSelectedImage(null)}
         >
-          <div
-            className="
-              relative
-              w-full
-              max-w-[1000px]
-              overflow-hidden
-              bg-[#F5EFE5]
-            "
-            onClick={(event) => event.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-label={activeImage.title}
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-3xl text-white transition hover:bg-white/30"
+            aria-label="Close image preview"
           >
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setActiveImage(null)}
-              aria-label="Close image preview"
-              className="
-                absolute
-                right-3
-                top-3
-                z-10
-                flex
-                h-[42px]
-                w-[42px]
-                items-center
-                justify-center
-                rounded-full
-                bg-white
-                text-[28px]
-                text-[#603912]
-                shadow-md
-                transition-colors
-                hover:bg-[#F5EFE5]
-                focus:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#BD8747]
-              "
-            >
-              &times;
-            </button>
+            &times;
+          </button>
 
-            {/* Preview Image */}
+          <div
+            className="w-full max-w-5xl"
+            onClick={(event) => event.stopPropagation()}
+          >
             <img
-              src={activeImage.image}
-              alt={activeImage.title}
-              className="
-                block
-                max-h-[75vh]
-                min-h-[220px]
-                w-full
-                bg-black
-                object-contain
-              "
+              src={selectedImage.image}
+              alt={selectedImage.alt}
+              className="max-h-[80vh] w-full rounded-lg object-contain"
             />
-
-            {/* Preview Details */}
-            <div className="px-5 py-5 sm:px-8 sm:py-6">
-              <p
-                className="
-                  font-['Work_Sans']
-                  text-[11px]
-                  font-semibold
-                  uppercase
-                  tracking-[2px]
-                  text-[#BD8747]
-                "
-              >
-                {activeImage.category}
-              </p>
-
-              <h3
-                className="
-                  mt-2
-                  font-['Fraunces']
-                  text-[25px]
-                  font-medium
-                  text-[#70451F]
-                  sm:text-[32px]
-                "
-              >
-                {activeImage.title}
-              </h3>
-            </div>
+            <h3
+              className="mt-4 text-center font-['Fraunces'] text-2xl text-white"
+              dangerouslySetInnerHTML={{ __html: selectedImage.title }}
+            />
           </div>
         </div>
       )}
