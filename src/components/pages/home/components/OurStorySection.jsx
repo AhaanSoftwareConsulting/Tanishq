@@ -7,7 +7,7 @@ import guestImg from '../../../../assets/GuestsGroup.png'; // Ba apnar local ima
 const OurStorySection = () => {
   return (
     <section className="bg-[#fcf8f2] text-[#331d0d] py-20 px-4 md:px-12 font-sans overflow-hidden">
-      <div className="max-w-[1600px] mx-auto text-center">
+      <div className="max-w-[1440px] mx-auto text-center">
         
         {/* Header Title */}
         <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
@@ -28,27 +28,27 @@ const OurStorySection = () => {
         </div>
 
         {/* Images Grid with Rotated Photo Frame Effect (Full Width & Larger Size) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start justify-center max-w-7xl mx-auto px-2">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start justify-center max-w-7xl mx-auto px-2">
           
           {/* Left Image - Slightly Tilted Left */}
-          <div className="transform -rotate-2 hover:rotate-0 transition-transform duration-300 rounded-lg overflow-hidden w-full">
-            <div className="w-full h-auto overflow-hidden">
+          <div className="transform -rotate-2 hover:rotate-0 transition-transform duration-300 overflow-hidden w-full md:col-span-7">
+            <div className="w-full h-full overflow-hidden">
               <img
                 src={staffImg}
                 alt="Tanishq Staff Team"
-                className="w-full h-auto object-contain object-center"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
 
           {/* Right Image - Slightly Tilted Right with Cursive Text Below */}
-          <div className="flex flex-col items-center w-full">
-            <div className="w-full transform rotate-2 hover:rotate-0 transition-transform duration-300 rounded-lg overflow-hidden">
-              <div className="w-full h-auto overflow-hidden">
+          <div className="flex flex-col items-center w-full md:col-span-5">
+            <div className="w-full transform rotate-2 hover:rotate-0 transition-transform duration-300 overflow-hidden">
+              <div className="w-full h-full overflow-hidden">
                 <img
                   src={guestImg}
                   alt="Guests enjoying at Tanishq"
-                  className="w-full h-[420px] object-contain object-center"
+                  className="w-full h-[490px] object-cover object-center"
                 />
               </div>
             </div>
