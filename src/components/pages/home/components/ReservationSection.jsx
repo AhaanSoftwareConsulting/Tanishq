@@ -569,7 +569,7 @@ const ReservationSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="
+                  className=" cursor-pointer
                     inline-flex
                     min-h-[62px]
                     items-center
