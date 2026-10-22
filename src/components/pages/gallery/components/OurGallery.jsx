@@ -47,13 +47,10 @@ const OurGallery = () => {
   );
 
   return (
-    <section className="bg-[#F7ECDD] py-16 md:py-20 lg:py-24">
+    <section className="bg-[#FFFFF] py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
-          <p className="mb-3 font-['Work_Sans'] text-sm font-semibold uppercase tracking-[3px] text-[#8B5E34]">
-            Our Moments
-          </p>
-          <h2 className="font-['Fraunces'] text-4xl font-medium text-[#2F2116] sm:text-5xl lg:text-6xl">
+          <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px] mb-6">
             Our Gallery
           </h2>
           <p className="mx-auto mt-4 max-w-2xl font-['Work_Sans'] text-base leading-7 text-[#6B5745] md:text-lg">
