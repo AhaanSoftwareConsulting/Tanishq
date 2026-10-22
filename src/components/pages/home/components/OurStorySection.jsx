@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Apnar assets folder-er path onujayi image import kore nin
 import staffImg from '../../../../assets/StaffGroup.png'; // Ba apnar local image path
@@ -8,7 +9,7 @@ const OurStorySection = () => {
   return (
     <section className="bg-[#fcf8f2] text-[#331d0d] py-20 px-4 md:px-12 font-sans overflow-hidden">
       <div className="max-w-[1600px] mx-auto text-center">
-        
+
         {/* Header Title */}
         <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
           A Taste of Home, Shared with Vietnam
@@ -22,14 +23,17 @@ const OurStorySection = () => {
 
         {/* Read Our Story CTA Button */}
         <div className="mb-14">
-          <button className="bg-[#4a2e16] hover:bg-[#331d0d] text-white text-xs md:text-sm font-medium py-3 px-8 rounded-full transition-colors duration-200 shadow-sm">
+          <Link
+            to="/about"
+            className="inline-block cursor-pointer bg-[#4a2e16] hover:bg-[#331d0d] text-white text-xs md:text-sm font-medium py-3 px-8 rounded-full transition-colors duration-200 shadow-sm"
+          >
             Read our story
-          </button>
+          </Link>
         </div>
 
         {/* Images Grid with Rotated Photo Frame Effect (Full Width & Larger Size) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start justify-center max-w-7xl mx-auto px-2">
-          
+
           {/* Left Image - Slightly Tilted Left */}
           <div className="transform -rotate-2 hover:rotate-0 transition-transform duration-300 rounded-lg overflow-hidden w-full">
             <div className="w-full h-auto overflow-hidden">
@@ -54,7 +58,10 @@ const OurStorySection = () => {
             </div>
 
             {/* Cursive Handwriting Text Under Second Image */}
-            <div className="mt-8 text-center text-3xl sm:text-2xl md:text-3xl text-[#4a2e16] leading-tight" style={{ fontFamily: "'Rustic Roadway - Personal use', cursive, sans-serif" }}>
+            <div
+              className="mt-8 text-center text-3xl sm:text-2xl md:text-3xl text-[#4a2e16] leading-tight"
+              style={{ fontFamily: "'Rustic Roadway - Personal use', cursive, sans-serif" }}
+            >
               <p>Experience the taste of tradition.</p>
               <p className="mt-2">Experience Tanishq.</p>
             </div>
