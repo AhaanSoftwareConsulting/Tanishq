@@ -121,7 +121,7 @@ const RestaurantGlimpse = () => {
             type="button"
             onClick={handlePrev}
             aria-label="Previous slide"
-            className="relative z-10  items-center  "
+            className="relative z-10  items-center  cursor-pointer"
           >
             <img
               src={leftArrow}
@@ -137,7 +137,7 @@ const RestaurantGlimpse = () => {
             type="button"
             onClick={handleNext}
             aria-label="Next slide"
-            className="relative z-10  items-center "
+            className="relative z-10  items-center cursor-pointer"
           >
             <img
               src={rightArrow}
