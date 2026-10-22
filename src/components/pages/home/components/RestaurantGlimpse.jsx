@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import leftArrow from '../../../../assets/leftArrow.png';
+import rightArrow from '../../../../assets/rightArrow.png';
 
 const galleryImages = [
   {
@@ -32,92 +33,126 @@ const galleryImages = [
 const RestaurantGlimpse = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Next and Previous handlers for the carousel
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+    setCurrentIndex(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+    setCurrentIndex(
+      (prev) => (prev + 1) % galleryImages.length
+    );
   };
 
-  // Get previous and next indexes for side previews
-  const prevIndex = currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1;
-  const nextIndex = currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1;
+  const prevIndex =
+    (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+
+  const nextIndex =
+    (currentIndex + 1) % galleryImages.length;
 
   return (
-    <section className="bg-[#f5ebd9] text-[#331d0d] py-20 px-4 md:px-12 font-sans overflow-hidden">
-      <div className="max-w-[1400px] mx-auto text-center">
+    <section className="overflow-hidden bg-[#f5ebd9] px-4 py-16 text-[#331d0d] sm:py-20 md:px-12">
+      <div className="mx-auto max-w-[1440px] text-center">
 
-        {/* Header Title */}
-        <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px] mb-6">
+        {/* Section heading */}
+        <h2 className="mb-6 font-['Fraunces'] text-[36px] font-normal leading-tight text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
           A Little Glimpse of Us
         </h2>
 
-        {/* See Full Gallery Button */}
-        <div className="mb-14">
-          <Link
-            to="/gallery"
-            className="inline-block cursor-pointer bg-[#5c3718] hover:bg-[#472a12] text-white text-xs md:text-sm font-medium py-3 px-7 rounded-full transition-colors duration-200 shadow-sm tracking-wide"
+        {/* Gallery button */}
+        <div className="mb-12 sm:mb-16">
+          <button
+            type="button"
+            className="rounded-full bg-[#5c3718] px-7 py-3 text-xs font-medium tracking-wide text-white shadow-sm transition-colors duration-300 hover:bg-[#472a12] md:text-sm"
           >
             See Full Gallery
-          </Link>
+          </button>
         </div>
 
-        {/* Carousel Showcase Wrapper */}
-        <div className="relative flex items-center justify-center max-w-5xl mx-auto min-h-[350px] md:min-h-[480px]">
+        {/* Image carousel */}
+        <div className="relative mx-auto flex gap-4 min-h-[260px] w-full max-w-[1280px] items-center justify-center overflow-hidden lg:min-h-[400px] xl:min-h-[516px]">
 
-          {/* Left Tilted Preview Image */}
-          <div className="hidden lg:block absolute left-[-40px] z-10 w-[260px] h-[380px] rounded-2xl overflow-hidden shadow-lg transform -rotate-6 opacity-60 hover:opacity-90 transition-all duration-300 pointer-events-none">
+          {/* Previous image: full-size landscape, tilted left */}
+          <div
+            className="pointer-events-none absolute -left-[5%] w-[15%] xl:left-[-16%] top-1/2 z-10 hidden xl:w-[30%] -translate-y-1/2 -rotate-[15deg] overflow-hidden grayscale-[80%] sepia-[25%] contrast-[85%] opacity-35 transition-all duration-700 ease-in-out sm:block sm:h-[200px] lg:h-[325px]"
+            aria-hidden="true"
+          >
             <img
               src={galleryImages[prevIndex].url}
-              alt="Previous preview"
-              className="w-full h-full object-cover filter grayscale-[30%]"
+              alt=""
+              className="h-full w-full object-cover"
+              draggable="false"
             />
           </div>
 
-          {/* Main Active Center Image */}
-          <div className="relative z-20 w-full max-w-[800px] h-[320px] sm:h-[420px] md:h-[480px] rounded-2xl overflow-hidden shadow-2xl bg-white">
+          {/* Active center image */}
+          <div
+            key={galleryImages[currentIndex].id}
+            className="relative z-20 h-[240px] w-[95%] sm:w-[68%] xl:w-[80%] max-w-[800px] overflow-hidden lg:h-[400px] xl:h-[516px]"
+          >
             <img
               src={galleryImages[currentIndex].url}
               alt={galleryImages[currentIndex].title}
-              className="w-full h-full object-cover object-center transition-all duration-500 ease-in-out"
+              className="h-full w-full animate-[galleryFadeIn_500ms_ease-in-out] object-cover object-center"
+              draggable="false"
             />
           </div>
 
-          {/* Right Tilted Preview Image */}
-          <div className="hidden lg:block absolute right-[-40px] z-10 w-[260px] h-[380px] rounded-2xl overflow-hidden shadow-lg transform rotate-6 opacity-60 hover:opacity-90 transition-all duration-300 pointer-events-none">
+          {/* Next image: full-size landscape, tilted right */}
+          <div
+            className="pointer-events-none absolute -right-[5%] w-[15%]  top-1/2 z-10 hidden xl:right-[-16%] top-1/2 z-10 hidden xl:w-[30%] -translate-y-1/2 rotate-[15deg] overflow-hidden grayscale-[80%] sepia-[25%] contrast-[85%] opacity-35 transition-all duration-700 ease-in-out sm:block sm:h-[200px] lg:h-[325px]"
+            aria-hidden="true"
+          >
             <img
               src={galleryImages[nextIndex].url}
-              alt="Next preview"
-              className="w-full h-full object-cover filter grayscale-[30%]"
+              alt=""
+              className="h-full w-full object-cover"
+              draggable="false"
             />
           </div>
-
         </div>
 
-        {/* Navigation Arrow Buttons */}
-        <div className="flex items-center justify-center gap-6 mt-12">
+        {/* Reference-style navigation */}
+        <div className="relative mx-auto gap-6 lg:gap-16 mt-7 flex items-center justify-center sm:mt-8">
+          
           <button
+            type="button"
             onClick={handlePrev}
-            className="w-12 h-12 rounded-full border border-[#8c6b52] flex items-center justify-center text-[#5c3718] hover:bg-[#5c3718] hover:text-white transition-all duration-200 shadow-sm"
             aria-label="Previous slide"
+            className="relative z-10  items-center  "
           >
-            <span className="text-xl">←</span>
+            <img
+              src={leftArrow}
+              alt=""
+              className="h-[80%] w-[80%] lg:h-full lg:w-full object-contain"
+              draggable="false"
+            />
           </button>
 
+          
+
           <button
+            type="button"
             onClick={handleNext}
-            className="w-12 h-12 rounded-full border border-[#8c6b52] flex items-center justify-center text-[#5c3718] hover:bg-[#5c3718] hover:text-white transition-all duration-200 shadow-sm"
             aria-label="Next slide"
+            className="relative z-10  items-center "
           >
-            <span className="text-xl">→</span>
+            <img
+              src={rightArrow}
+              alt=""
+              className="h-[80%] w-[80%] lg:h-full lg:w-full object-contain"
+              draggable="false"
+            />
           </button>
         </div>
 
       </div>
+
+
     </section>
   );
-}
+};
 
 export default RestaurantGlimpse;
+
