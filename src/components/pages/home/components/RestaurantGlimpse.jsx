@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 const galleryImages = [
   {
@@ -47,7 +48,7 @@ const RestaurantGlimpse = () => {
   return (
     <section className="bg-[#f5ebd9] text-[#331d0d] py-20 px-4 md:px-12 font-sans overflow-hidden">
       <div className="max-w-[1400px] mx-auto text-center">
-        
+
         {/* Header Title */}
         <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px] mb-6">
           A Little Glimpse of Us
@@ -55,14 +56,17 @@ const RestaurantGlimpse = () => {
 
         {/* See Full Gallery Button */}
         <div className="mb-14">
-          <button className="bg-[#5c3718] hover:bg-[#472a12] text-white text-xs md:text-sm font-medium py-3 px-7 rounded-full transition-colors duration-200 shadow-sm tracking-wide">
+          <Link
+            to="/gallery"
+            className="inline-block cursor-pointer bg-[#5c3718] hover:bg-[#472a12] text-white text-xs md:text-sm font-medium py-3 px-7 rounded-full transition-colors duration-200 shadow-sm tracking-wide"
+          >
             See Full Gallery
-          </button>
+          </Link>
         </div>
 
         {/* Carousel Showcase Wrapper */}
         <div className="relative flex items-center justify-center max-w-5xl mx-auto min-h-[350px] md:min-h-[480px]">
-          
+
           {/* Left Tilted Preview Image */}
           <div className="hidden lg:block absolute left-[-40px] z-10 w-[260px] h-[380px] rounded-2xl overflow-hidden shadow-lg transform -rotate-6 opacity-60 hover:opacity-90 transition-all duration-300 pointer-events-none">
             <img
@@ -101,7 +105,7 @@ const RestaurantGlimpse = () => {
           >
             <span className="text-xl">←</span>
           </button>
-          
+
           <button
             onClick={handleNext}
             className="w-12 h-12 rounded-full border border-[#8c6b52] flex items-center justify-center text-[#5c3718] hover:bg-[#5c3718] hover:text-white transition-all duration-200 shadow-sm"
