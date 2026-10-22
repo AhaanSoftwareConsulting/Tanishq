@@ -12,10 +12,12 @@ import AboutComponents from "./components/pages/about/AboutComponents";
 import ContactComponents from "./components/pages/contact/ContactComponents";
 import MenuComponents from "./components/pages/menu/MenuComponents";
 import GalleryComponents from "./components/pages/gallery/GalleryComponents";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<HomeComponents />} />
