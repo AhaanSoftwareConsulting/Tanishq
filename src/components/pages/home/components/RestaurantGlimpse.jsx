@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import leftArrow from '../../../../assets/leftArrow.png';
 import rightArrow from '../../../../assets/rightArrow.png';
 
@@ -62,12 +63,12 @@ const RestaurantGlimpse = () => {
 
         {/* Gallery button */}
         <div className="mb-12 sm:mb-16">
-          <button
-            type="button"
-            className="rounded-full bg-[#5c3718] px-7 py-3 text-xs font-medium tracking-wide text-white shadow-sm transition-colors duration-300 hover:bg-[#472a12] md:text-sm"
+          <Link
+            to="/gallery"
+            className="inline-block cursor-pointer bg-[#5c3718] hover:bg-[#472a12] text-white text-xs md:text-sm font-medium py-3 px-7 rounded-full transition-colors duration-200 shadow-sm tracking-wide"
           >
             See Full Gallery
-          </button>
+          </Link>
         </div>
 
         {/* Image carousel */}
@@ -115,7 +116,7 @@ const RestaurantGlimpse = () => {
 
         {/* Reference-style navigation */}
         <div className="relative mx-auto gap-6 lg:gap-16 mt-7 flex items-center justify-center sm:mt-8">
-          
+
           <button
             type="button"
             onClick={handlePrev}
@@ -130,7 +131,7 @@ const RestaurantGlimpse = () => {
             />
           </button>
 
-          
+
 
           <button
             type="button"
