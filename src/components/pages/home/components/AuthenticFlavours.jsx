@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from "react-router-dom";
 
 // Assets folder path onujayi image gulo import kore nin
 import paneerTikkaImg from '../../../../assets/PaneerTikka.jpg'; // Ba apnar exact image name
@@ -124,7 +125,7 @@ const AuthenticFlavours = () => {
   return (
     <section className="bg-[#fdf9f3] text-[#331d0d] py-16 px-4 md:px-12 font-sans overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
-        
+
         {/* Header Section */}
         <div className="text-center mb-10">
           <h2 className="font-['Fraunces'] text-[36px] font-normal leading-[1.1] text-[#5E3A17] sm:text-[46px] lg:text-[55px]">
@@ -143,11 +144,10 @@ const AuthenticFlavours = () => {
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-200 whitespace-nowrap border ${
-                  isActive
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-200 whitespace-nowrap border ${isActive
                     ? 'bg-[#4a2e16] text-white border-[#4a2e16] shadow-sm'
                     : 'bg-white/80 text-[#4a2e16] border-[#e2d5c3] hover:bg-[#f3e8d7]'
-                }`}
+                  }`}
               >
                 <span className="text-[10px]">{cat.icon}</span>
                 <span>{cat.label}</span>
@@ -197,7 +197,7 @@ const AuthenticFlavours = () => {
 
         {/* Bottom Control Bar & View All Button */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-          
+
           {/* Carousel Pagination & Arrows Controls */}
           <div className="bg-[#f0e4d2] px-4 py-2.5 rounded-2xl flex items-center gap-4 border border-[#e2d3be]">
             {/* Left Arrow */}
@@ -214,11 +214,10 @@ const AuthenticFlavours = () => {
               {[0, 1, 2, 3].map((dotIndex) => (
                 <span
                   key={dotIndex}
-                  className={`transition-all duration-300 rounded-full ${
-                    activeDot === dotIndex
+                  className={`transition-all duration-300 rounded-full ${activeDot === dotIndex
                       ? 'w-6 h-2 bg-[#4a2e16]'
                       : 'w-2 h-2 bg-[#bda892]'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
@@ -234,9 +233,12 @@ const AuthenticFlavours = () => {
           </div>
 
           {/* View All Button */}
-          <button className="bg-[#4a2e16] hover:bg-[#331d0d] text-white text-xs md:text-sm font-medium py-3 px-8 rounded-full transition-colors duration-200 shadow-sm">
+          <Link
+            to="/menu"
+            className="inline-block cursor-pointer bg-[#4a2e16] hover:bg-[#331d0d] text-white text-xs md:text-sm font-medium py-3 px-8 rounded-full transition-colors duration-200 shadow-sm"
+          >
             View All
-          </button>
+          </Link>
 
         </div>
 
