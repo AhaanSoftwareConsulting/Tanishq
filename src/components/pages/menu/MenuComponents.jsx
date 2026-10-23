@@ -9,7 +9,7 @@ const MenuComponents = () => {
   return (
     <main>
         <MenuBanner/>
-        <AuthenticFlavours/>
+        {/* <AuthenticFlavours/> */}
         <MenuSection/>
         {/* <MenuCategories/> */}
     </main>
