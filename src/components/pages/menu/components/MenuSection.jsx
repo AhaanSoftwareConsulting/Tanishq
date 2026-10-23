@@ -32,7 +32,7 @@ const MenuSection = () => {
       } catch (err) {
         if (isMounted) {
           setError(
-            err.message || "Unable to load menu items. Please try again."
+            err.message || "Unable to load menu items. Please try again.",
           );
         }
       } finally {
@@ -87,6 +87,12 @@ const MenuSection = () => {
 
     if (typeof value === "string") return value.trim();
     if (typeof value === "number") return String(value);
+    if (Array.isArray(value)) {
+      return value.map(v => (typeof v === "object" ? (v.value || v.label || "") : String(v))).join(",");
+    }
+    if (value && typeof value === "object") {
+      return String(value.value || value.label || "").trim();
+    }
 
     return "";
   };
@@ -95,12 +101,28 @@ const MenuSection = () => {
   const getCategoryName = (item) =>
     getACFValue(item, "category_name") || "Other Menu";
 
-  // Normalize city
-  const getCityValue = (item) =>
-    getACFValue(item, "city")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-");
+  // Robust city extraction supporting strings, arrays, objects from ACF checkboxes/selects
+  const getCityValuesList = (item) => {
+    const raw = item?.acf?.city;
+    let values = [];
+
+    if (Array.isArray(raw)) {
+      values = raw;
+    } else if (typeof raw === "string") {
+      values = raw.split(",");
+    } else if (raw && typeof raw === "object") {
+      values = [raw.value, raw.label, raw.name].filter(Boolean);
+    } else {
+      values = [getACFValue(item, "city")];
+    }
+
+    return values
+      .map((v) => {
+        const valStr = typeof v === "object" ? (v.value || v.label || "") : String(v);
+        return valStr.toLowerCase().trim().replace(/\s+/g, "-");
+      })
+      .filter(Boolean);
+  };
 
   // Get featured image
   const getFeaturedImage = (item) =>
@@ -128,16 +150,12 @@ const MenuSection = () => {
             entry.name ||
             entry.menu_subname ||
             entry.subtitle ||
-            entry.price !== undefined)
+            entry.price !== undefined),
       )
       .map((entry, index) => ({
         id: `${item.id}-${index}`,
-        menu_name: decodeHTML(
-          entry.menu_name || entry.name || "Menu Item"
-        ),
-        menu_subname: decodeHTML(
-          entry.menu_subname || entry.subtitle || ""
-        ),
+        menu_name: decodeHTML(entry.menu_name || entry.name || "Menu Item"),
+        menu_subname: decodeHTML(entry.menu_subname || entry.subtitle || ""),
         price: entry.price ?? "",
       }));
   };
@@ -154,24 +172,20 @@ const MenuSection = () => {
       }
     });
 
-    return Array.from(categoryMap.values()).sort((a, b) =>
-      a.localeCompare(b)
-    );
+    return Array.from(categoryMap.values()).sort((a, b) => a.localeCompare(b));
   }, [menuItems]);
 
   // Search categories
   const searchedCategories = useMemo(
     () =>
       categories.filter((category) =>
-        category
-          .toLowerCase()
-          .includes(categorySearch.toLowerCase().trim())
+        category.toLowerCase().includes(categorySearch.toLowerCase().trim()),
       ),
-    [categories, categorySearch]
+    [categories, categorySearch],
   );
 
   // City filter matching
-  const matchesCity = (city, selectedCity) => {
+  const matchesCity = (itemCityList, selectedCity) => {
     const cityAliases = {
       "ho-chi-minh": [
         "ho-chi-minh",
@@ -187,20 +201,24 @@ const MenuSection = () => {
       ],
     };
 
-    return (cityAliases[selectedCity] || [selectedCity]).includes(city);
+    const allowed = cityAliases[selectedCity] || [selectedCity];
+
+    return itemCityList.some((itemCity) =>
+      allowed.some((alias) => itemCity.includes(alias) || alias.includes(itemCity))
+    );
   };
 
   // Filter menu items
   const filteredMenuItems = useMemo(
     () =>
       menuItems.filter((item) => {
-        const city = getCityValue(item);
+        const itemCityList = getCityValuesList(item);
         const category = getCategoryName(item);
 
         const cityMatches =
           selectedCities.length === 0 ||
           selectedCities.some((selectedCity) =>
-            matchesCity(city, selectedCity)
+            matchesCity(itemCityList, selectedCity),
           );
 
         const categoryMatches =
@@ -209,7 +227,7 @@ const MenuSection = () => {
 
         return cityMatches && categoryMatches;
       }),
-    [menuItems, selectedCities, selectedCategories]
+    [menuItems, selectedCities, selectedCategories],
   );
 
   // Toggle city
@@ -217,7 +235,7 @@ const MenuSection = () => {
     setSelectedCities((previous) =>
       previous.includes(city)
         ? previous.filter((value) => value !== city)
-        : [...previous, city]
+        : [...previous, city],
     );
   };
 
@@ -226,7 +244,7 @@ const MenuSection = () => {
     setSelectedCategories((previous) =>
       previous.includes(category)
         ? previous.filter((value) => value !== category)
-        : [...previous, category]
+        : [...previous, category],
     );
   };
 
@@ -327,10 +345,10 @@ const MenuSection = () => {
 
         {/* Main layout */}
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)] xl:gap-8">
-          {/* Filter sidebar */}
+          {/* Filter sidebar - Height auto, no scrollbar */}
           <aside
             style={glassBackground}
-            className="flex flex-col overflow-hidden rounded-2xl border border-white/80 shadow-[0_12px_35px_rgba(91,62,39,0.09)] backdrop-blur-2xl lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)]"
+            className="flex flex-col overflow-hidden rounded-2xl border border-white/80 shadow-[0_12px_35px_rgba(91,62,39,0.09)] backdrop-blur-2xl lg:sticky lg:top-24"
           >
             <div className="shrink-0 border-b border-[#956B4A]/20 p-5">
               <h3 className="mb-4 text-sm font-semibold text-[#35271F]">
@@ -356,7 +374,7 @@ const MenuSection = () => {
               </div>
             </div>
 
-            <div className="flex min-h-0 flex-1 flex-col p-5">
+            <div className="flex flex-col p-5">
               <h3 className="mb-4 shrink-0 text-sm font-semibold text-[#35271F]">
                 Categories
               </h3>
@@ -369,7 +387,7 @@ const MenuSection = () => {
                 className="mb-4 w-full shrink-0 rounded-xl border border-white/80 bg-white/45 px-3 py-2.5 text-sm text-[#593719] outline-none backdrop-blur-lg placeholder:text-[#91877D] focus:border-[#A06A3B] focus:bg-white/70"
               />
 
-              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+              <div className="space-y-3 pr-1">
                 {searchedCategories.map((category) => (
                   <label
                     key={category}
@@ -387,9 +405,7 @@ const MenuSection = () => {
                 ))}
 
                 {searchedCategories.length === 0 && (
-                  <p className="text-xs text-[#91877D]">
-                    No categories found.
-                  </p>
+                  <p className="text-xs text-[#91877D]">No categories found.</p>
                 )}
               </div>
 
@@ -450,9 +466,7 @@ const MenuSection = () => {
                   return [
                     {
                       id: `fallback-${item.id}`,
-                      menu_name: decodeHTML(
-                        item.title?.rendered || "Menu"
-                      ),
+                      menu_name: decodeHTML(item.title?.rendered || "Menu"),
                       menu_subname: "Menu details are not available.",
                       price: "",
                     },
@@ -533,7 +547,7 @@ const MenuSection = () => {
                             src={image}
                             alt={category}
                             loading="lazy"
-                            className="h-auto w-full rounded-2xl object-cover"
+                            className="h-auto w-[500px] rounded-2xl object-cover"
                           />
                         </div>
                       ) : (
@@ -633,11 +647,11 @@ const MenuSection = () => {
                 </div>
 
                 {activeMenu.image && (
-                  <div className="hidden overflow-hidden rounded-2xl border border-white/80 bg-white/30 p-1 shadow-md md:block">
+                  <div className="hidden overflow-hidden p-1 md:block">
                     <img
                       src={activeMenu.image}
                       alt={activeMenu.category}
-                      className="h-[130px] w-full rounded-xl object-cover"
+                      className="h-auto w-full object-cover"
                     />
                   </div>
                 )}
@@ -790,4 +804,3 @@ const MenuSection = () => {
 };
 
 export default MenuSection;
-
