@@ -13,6 +13,9 @@ import ContactComponents from "./components/pages/contact/ContactComponents";
 import MenuComponents from "./components/pages/menu/MenuComponents";
 import GalleryComponents from "./components/pages/gallery/GalleryComponents";
 import ScrollToTop from "./ScrollToTop";
+import BlogComponents from "./components/pages/blog/BlogComponents";
+import BlogDetails from "./components/pages/blog/components/BlogDetails";
+import WhatsAppButton from "./components/layouts/whatsapp/WhatsAppButton";
 
 function App() {
   return (
@@ -23,10 +26,13 @@ function App() {
         <Route path="/" element={<HomeComponents />} />
         <Route path="/about" element={<AboutComponents />} />
         <Route path="/menu" element={<MenuComponents />} />
+        <Route path="/blog" element={ <BlogComponents/>} />
+        <Route path="/blog/:slug" element={<BlogDetails/>}/>
         <Route path="/gallery" element={<GalleryComponents />} />
         <Route path="/contact" element={<ContactComponents />} />
       </Routes>
       <Footer />
+      <WhatsAppButton/>
     </BrowserRouter>
   );
 }

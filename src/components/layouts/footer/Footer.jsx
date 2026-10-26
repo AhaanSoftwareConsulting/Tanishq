@@ -14,6 +14,7 @@ const quickLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
   { name: "Menu", path: "/menu" },
+  { name: "Blog", path: "/blog" },
   { name: "Gallery", path: "/gallery" },
   { name: "Contact Us", path: "/contact" },
 ];
