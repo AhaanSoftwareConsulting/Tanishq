@@ -73,3 +73,25 @@ export const submitContactForm = async (data) => {
 
   return result;
 };
+
+
+// =====================================
+// BLOG API
+// =====================================
+
+// Get all published blog posts
+export const getBlogPosts = async () => {
+  return wordpressFetch(
+    "/posts?_embed&per_page=100&status=publish"
+  );
+};
+
+// Get a single blog post by slug
+export const getBlogPostBySlug = async (slug) => {
+  const posts = await wordpressFetch(
+    `/posts?slug=${encodeURIComponent(slug)}&_embed&status=publish`
+  );
+
+  return posts.length > 0 ? posts[0] : null;
+};
+
