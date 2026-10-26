@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { getMenuItems } from "../../../../api/wordpressApi";
 
 const CITY_OPTIONS = [
@@ -14,7 +15,7 @@ const MenuSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeMenu, setActiveMenu] = useState(null);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true); // Default collapsed
 
   // Fetch menu items from WordPress
   useEffect(() => {
@@ -354,157 +355,154 @@ const MenuSection = () => {
         {/* Main layout */}
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)] xl:gap-8">
           {/* Collapsible Filter Sidebar */}
+          <aside
+            style={glassBackground}
+            className="sidebar-scroll relative flex max-h-[calc(100vh-120px)] flex-col overflow-y-auto overflow-x-hidden rounded-2xl border border-white/80 shadow-[0_12px_35px_rgba(91,62,39,0.09)] backdrop-blur-2xl transition-all duration-300 lg:sticky lg:top-24"
+          >
+            {/* Sidebar Header */}
+            <div className="flex shrink-0 items-center justify-between gap-3 border-b border-[#956B4A]/20 px-5 py-4">
+              <div className="min-w-0">
+                <h3 className="font-['Fraunces'] text-lg font-semibold text-[#482B19]">
+                  Filters
+                </h3>
 
-          {/* Filter Sidebar */}
+                <p className="mt-1 text-xs text-[#827970]">
+                  Find your favourite dishes
+                </p>
+              </div>
+            </div>
 
-{/* Collapsible Filter Sidebar */}
-<aside
-  style={glassBackground}
-  className="relative h-fit overflow-hidden rounded-2xl border border-white/80 shadow-[0_12px_35px_rgba(91,62,39,0.09)] backdrop-blur-2xl transition-all duration-300 lg:sticky lg:top-24"
->
-  {/* Sidebar Header */}
-  <div className="flex items-center justify-between gap-3 border-b border-[#956B4A]/20 px-5 py-4">
-    <div className="min-w-0">
-      <h3 className="font-['Fraunces'] text-lg font-semibold text-[#482B19]">
-        Filters
-      </h3>
+            {/* Scrollable Sidebar Content */}
+            <div className="min-h-0 flex-1">
+              {/* City Filters */}
+              <div className="border-b border-[#956B4A]/20 p-5">
+                <h3 className="mb-4 text-sm font-semibold text-[#35271F]">
+                  City
+                </h3>
 
-      <p className="mt-1 text-xs text-[#827970]">
-        Find your favourite dishes
-      </p>
-    </div>
-  </div>
+                <div className="space-y-3">
+                  {CITY_OPTIONS.map((city) => (
+                    <label
+                      key={city.value}
+                      className="flex cursor-pointer items-center gap-2 text-sm text-[#827970]"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedCities.includes(city.value)}
+                        onChange={() => toggleCity(city.value)}
+                        className="h-4 w-4 shrink-0 accent-[#89572F]"
+                      />
 
-  {/* City Filters - Always Visible */}
-  <div className="border-b border-[#956B4A]/20 p-5">
-    <h3 className="mb-4 text-sm font-semibold text-[#35271F]">
-      City
-    </h3>
+                      <span>{city.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
 
-    <div className="space-y-3">
-      {CITY_OPTIONS.map((city) => (
-        <label
-          key={city.value}
-          className="flex cursor-pointer items-center gap-2 text-sm text-[#827970]"
-        >
-          <input
-            type="checkbox"
-            checked={selectedCities.includes(city.value)}
-            onChange={() => toggleCity(city.value)}
-            className="h-4 w-4 shrink-0 accent-[#89572F]"
-          />
+              {/* Category Filters */}
+              <div className="p-5">
+                {/* Categories Heading + Collapse Button */}
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <h3 className="text-sm font-semibold text-[#35271F]">
+                    Categories
+                  </h3>
 
-          <span>{city.label}</span>
-        </label>
-      ))}
-    </div>
-  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsSidebarCollapsed((previous) => !previous)}
+                    aria-label={
+                      isSidebarCollapsed ? "Expand categories" : "Collapse categories"
+                    }
+                    aria-expanded={!isSidebarCollapsed}
+                    title={
+                      isSidebarCollapsed ? "Expand categories" : "Collapse categories"
+                    }
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#956B4A]/25 bg-white/50 text-[#653A16] transition-all duration-300 hover:bg-[#653A16] hover:text-white"
+                  >
+                    <svg
+                      className={`h-4 w-4 transition-transform duration-300 ${
+                        isSidebarCollapsed ? "-rotate-90" : "rotate-0"
+                      }`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M6 9l6 6 6-6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
 
-  {/* Category Filters */}
-  <div className="p-5">
-    {/* Categories Heading + Collapse Button */}
-    <div className="mb-4 flex items-center justify-between gap-3">
-      <h3 className="text-sm font-semibold text-[#35271F]">
-        Categories
-      </h3>
+                {/* Category Search */}
+                <input
+                  type="text"
+                  value={categorySearch}
+                  onChange={(event) => setCategorySearch(event.target.value)}
+                  placeholder="⌕ Search Categories"
+                  className="mb-4 w-full rounded-xl border border-white/80 bg-white/45 px-3 py-2.5 text-sm text-[#593719] outline-none backdrop-blur-lg placeholder:text-[#91877D] focus:border-[#A06A3B] focus:bg-white/70"
+                />
 
-      <button
-        type="button"
-        onClick={() => setIsSidebarCollapsed((previous) => !previous)}
-        aria-label={
-          isSidebarCollapsed ? "Expand categories" : "Collapse categories"
-        }
-        aria-expanded={!isSidebarCollapsed}
-        title={
-          isSidebarCollapsed ? "Expand categories" : "Collapse categories"
-        }
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#956B4A]/25 bg-white/50 text-[#653A16] transition-all duration-300 hover:bg-[#653A16] hover:text-white"
-      >
-        <svg
-          className={`h-4 w-4 transition-transform duration-300 ${
-            isSidebarCollapsed ? "-rotate-90" : "rotate-0"
-          }`}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          aria-hidden="true"
-        >
-          <path
-            d="M6 9l6 6 6-6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-    </div>
+                {/* Category List */}
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                    !isSidebarCollapsed || categorySearch.trim() !== ""
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                  aria-hidden={
+                    isSidebarCollapsed && categorySearch.trim() === ""
+                  }
+                  inert={
+                    isSidebarCollapsed && categorySearch.trim() === ""
+                  }
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="space-y-3">
+                      {searchedCategories.map((category) => (
+                        <label
+                          key={category}
+                          className="flex cursor-pointer items-start gap-2 text-sm text-[#827970]"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(category)}
+                            onChange={() => toggleCategory(category)}
+                            className="mt-0.5 h-4 w-4 shrink-0 accent-[#89572F]"
+                          />
 
-    {/* Category Search - Always Visible */}
-    <input
-      type="text"
-      value={categorySearch}
-      onChange={(event) => setCategorySearch(event.target.value)}
-      placeholder="⌕ Search Categories"
-      className="mb-4 w-full rounded-xl border border-white/80 bg-white/45 px-3 py-2.5 text-sm text-[#593719] outline-none backdrop-blur-lg placeholder:text-[#91877D] focus:border-[#A06A3B] focus:bg-white/70"
-    />
+                          <span>{category}</span>
+                        </label>
+                      ))}
 
-    {/* Category List
-        Search করলে collapsed থাকলেও result দেখাবে */}
-    <div
-      className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
-        !isSidebarCollapsed || categorySearch.trim() !== ""
-          ? "grid-rows-[1fr] opacity-100"
-          : "grid-rows-[0fr] opacity-0"
-      }`}
-      aria-hidden={
-        isSidebarCollapsed && categorySearch.trim() === ""
-      }
-      inert={
-        isSidebarCollapsed && categorySearch.trim() === ""
-      }
-    >
-      <div className="min-h-0 overflow-hidden">
-        <div className="space-y-3">
-          {searchedCategories.map((category) => (
-            <label
-              key={category}
-              className="flex cursor-pointer items-start gap-2 text-sm text-[#827970]"
-            >
-              <input
-                type="checkbox"
-                checked={selectedCategories.includes(category)}
-                onChange={() => toggleCategory(category)}
-                className="mt-0.5 h-4 w-4 shrink-0 accent-[#89572F]"
-              />
+                      {searchedCategories.length === 0 && (
+                        <p className="text-xs text-[#91877D]">
+                          No categories found.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-              <span>{category}</span>
-            </label>
-          ))}
-
-          {searchedCategories.length === 0 && (
-            <p className="text-xs text-[#91877D]">
-              No categories found.
-            </p>
-          )}
-        </div>
-      </div>
-    </div>
-
-    {/* Clear Filters */}
-    {(selectedCities.length > 0 ||
-      selectedCategories.length > 0 ||
-      categorySearch !== "") && (
-      <button
-        type="button"
-        onClick={clearFilters}
-        className="mt-5 text-sm font-medium text-[#89572F] underline underline-offset-4 transition-colors hover:text-[#4E2B10]"
-      >
-        Clear Filters
-      </button>
-    )}
-  </div>
-</aside>
-
+                {/* Clear Filters */}
+                {(selectedCities.length > 0 ||
+                  selectedCategories.length > 0 ||
+                  categorySearch !== "") && (
+                  <button
+                    type="button"
+                    onClick={clearFilters}
+                    className="mt-5 text-sm font-medium text-[#89572F] underline underline-offset-4 transition-colors hover:text-[#4E2B10]"
+                  >
+                    Clear Filters
+                  </button>
+                )}
+              </div>
+            </div>
+          </aside>
 
           {/* Menu cards */}
           <div className="min-w-0">
@@ -795,6 +793,17 @@ const MenuSection = () => {
 
       {/* Popup scrollbar and animation styles */}
       <style>{`
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .sidebar-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .sidebar-scroll {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+
         .menu-modal {
           isolation: isolate;
           animation: menuModalEnter 260ms ease-out both;
