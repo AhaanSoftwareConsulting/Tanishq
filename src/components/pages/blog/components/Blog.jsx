@@ -103,17 +103,13 @@ const Blog = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-white px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-
       {/* Background Decorative Glows */}
       <div className="pointer-events-none absolute -left-40 top-40 h-96 w-96 rounded-full bg-[#DCE8D5]/60 blur-[100px]" />
-
       <div className="pointer-events-none absolute -right-40 top-96 h-96 w-96 rounded-full bg-[#FFD0A8]/50 blur-[110px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
         {/* Section Heading */}
         <div className="mb-10 text-center sm:mb-12">
-
           <span className="mb-4 inline-block rounded-full border border-[#D9C7AD]/70 bg-white/50 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#98612E] backdrop-blur-md">
             Our Journal
           </span>
@@ -132,9 +128,7 @@ const Blog = () => {
 
         {/* Search Bar - Centered Above Blog Grid */}
         <div className="mx-auto mb-10 max-w-xl sm:mb-12">
-
           <div className="group/search flex items-center gap-3 rounded-full border border-[#D9C7AD]/60 bg-gradient-to-r from-white/80 via-[#F4F1E5]/70 to-[#FFD9B8]/60 px-4 py-3 shadow-[0_8px_30px_rgba(96,57,18,0.07)] backdrop-blur-xl transition-all duration-300 focus-within:border-[#B78A59] focus-within:shadow-[0_10px_35px_rgba(96,57,18,0.13)] sm:px-6 sm:py-4">
-
             {/* Search Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -177,13 +171,6 @@ const Blog = () => {
 
           {/* Search Results Information */}
           <div className="mt-3 flex min-h-5 items-center justify-between gap-3 px-3">
-
-            {/* <p className="text-xs text-[#968575] sm:text-sm">
-              {searchQuery.trim()
-                ? `Search results for "${searchQuery.trim()}"`
-                : "Explore our latest stories"}
-            </p> */}
-
             {searchQuery.trim() && (
               <span className="shrink-0 text-xs font-medium text-[#98612E] sm:text-sm">
                 {filteredBlogs.length}{" "}
@@ -195,110 +182,96 @@ const Blog = () => {
 
         {/* Blog Grid */}
         {filteredBlogs.length > 0 ? (
-
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-
             {filteredBlogs.map((blog) => {
               const image = getFeaturedImage(blog);
               const title = getPlainTitle(blog.title?.rendered);
 
               return (
-                <article
+                <Link
                   key={blog.id}
+                  to={`/blog/${blog.slug}`}
+                  aria-label={`Read ${title}`}
                   className={glassCard}
                 >
+                  <article className="flex h-full flex-col">
+                    {/* Soft Glow Inside Card */}
+                    <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-white/35 blur-3xl" />
 
-                  {/* Soft Glow Inside Card */}
-                  <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-white/35 blur-3xl" />
+                    {/* Featured Image */}
+                    <div className="relative p-3 pb-0">
+                      <div className="relative h-56 overflow-hidden rounded-[18px] border border-white/70 bg-[#E9DDCC]/70 sm:h-60">
+                        {image ? (
+                          <img
+                            src={image}
+                            alt={title}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center text-sm text-[#796958]">
+                            No Featured Image
+                          </div>
+                        )}
 
-                  {/* Featured Image */}
-                  <Link
-                    to={`/blog/${blog.slug}`}
-                    aria-label={`Read ${title}`}
-                    className="relative block p-3 pb-0"
-                  >
-                    <div className="relative h-56 overflow-hidden rounded-[18px] border border-white/70 bg-[#E9DDCC]/70 sm:h-60">
+                        {/* Image Overlay */}
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2F2116]/25 via-transparent to-white/10" />
 
-                      {image ? (
-                        <img
-                          src={image}
-                          alt={title}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-sm text-[#796958]">
-                          No Featured Image
+                        {/* Glass Date Badge */}
+                        <div className="absolute bottom-3 left-3 rounded-full border border-white/70 bg-white/65 px-4 py-2 shadow-sm backdrop-blur-xl">
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#603912] sm:text-xs">
+                            {new Date(blog.date).toLocaleDateString("en-IN", {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
                         </div>
-                      )}
+                      </div>
+                    </div>
 
-                      {/* Image Overlay */}
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2F2116]/25 via-transparent to-white/10" />
+                    {/* Card Content */}
+                    <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6">
+                      {/* Decorative Line */}
+                      <div className="mb-4 h-[2px] w-12 rounded-full bg-gradient-to-r from-[#A56B32] to-[#E8C6A1]" />
 
-                      {/* Glass Date Badge */}
-                      <div className="absolute bottom-3 left-3 rounded-full border border-white/70 bg-white/65 px-4 py-2 shadow-sm backdrop-blur-xl">
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#603912] sm:text-xs">
-                          {new Date(blog.date).toLocaleDateString("en-IN", {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          })}
+                      {/* Blog Title */}
+                      <h2
+                        className="mb-3 font-['Fraunces'] text-2xl font-medium leading-snug text-[#452D1C] transition-colors duration-300 group-hover:text-[#98612E]"
+                        dangerouslySetInnerHTML={{
+                          __html: blog.title?.rendered || "",
+                        }}
+                      />
+
+                      {/* Short Description */}
+                      <p className="mb-6 flex-1 text-sm leading-7 text-[#796958] sm:text-[15px]">
+                        {getShortDescription(
+                          blog.excerpt?.rendered ||
+                            blog.content?.rendered ||
+                            "",
+                          25
+                        )}
+                      </p>
+
+                      {/* View More Button */}
+                      <div className="mt-auto border-t border-white/70 pt-5">
+                        <span className="group/button inline-flex items-center justify-center gap-3 rounded-full border border-[#CBB397]/70 bg-white/50 px-6 py-3 text-sm font-semibold text-[#603912] shadow-sm backdrop-blur-lg transition-all duration-300 group-hover:border-[#603912] group-hover:bg-[#603912] group-hover:text-white group-hover:shadow-lg">
+                          View More
+                          <span className="inline-block transition-transform duration-300 group-hover/button:translate-x-1">
+                            →
+                          </span>
                         </span>
                       </div>
                     </div>
-                  </Link>
-
-                  {/* Card Content */}
-                  <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6">
-
-                    {/* Decorative Line */}
-                    <div className="mb-4 h-[2px] w-12 rounded-full bg-gradient-to-r from-[#A56B32] to-[#E8C6A1]" />
-
-                    {/* Blog Title */}
-                    <h2
-                      className="mb-3 font-['Fraunces'] text-2xl font-medium leading-snug text-[#452D1C] transition-colors duration-300 group-hover:text-[#98612E]"
-                      dangerouslySetInnerHTML={{
-                        __html: blog.title?.rendered || "",
-                      }}
-                    />
-
-                    {/* Short Description */}
-                    <p className="mb-6 flex-1 text-sm leading-7 text-[#796958] sm:text-[15px]">
-                      {getShortDescription(
-                        blog.excerpt?.rendered ||
-                          blog.content?.rendered ||
-                          "",
-                        25
-                      )}
-                    </p>
-
-                    {/* View More Button */}
-                    <div className="mt-auto border-t border-white/70 pt-5">
-
-                      <Link
-                        to={`/blog/${blog.slug}`}
-                        className="group/button inline-flex items-center justify-center gap-3 rounded-full border border-[#CBB397]/70 bg-white/50 px-6 py-3 text-sm font-semibold text-[#603912] shadow-sm backdrop-blur-lg transition-all duration-300 hover:border-[#603912] hover:bg-[#603912] hover:text-white hover:shadow-lg"
-                      >
-                        View More
-
-                        <span className="inline-block transition-transform duration-300 group-hover/button:translate-x-1">
-                          →
-                        </span>
-                      </Link>
-                    </div>
-                  </div>
-                </article>
+                  </article>
+                </Link>
               );
             })}
           </div>
-
         ) : (
-
           /* Empty Search Results */
           <div className="rounded-3xl border border-white/70 bg-gradient-to-br from-white/70 via-[#F4F1E5]/60 to-[#FFD9B8]/50 px-6 py-16 text-center shadow-lg backdrop-blur-xl sm:px-10">
-
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/80 bg-white/60 text-[#98612E] shadow-sm">
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -339,11 +312,9 @@ const Blog = () => {
             )}
           </div>
         )}
-
       </div>
     </section>
   );
 };
 
 export default Blog;
-
