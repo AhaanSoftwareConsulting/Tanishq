@@ -122,9 +122,8 @@ const HeroBanner = () => {
 
             {/* Get Direction */}
             <a
-              href="https://www.google.com/maps"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/contact#find-your-way"
+              
               className="
                 inline-flex min-h-[42px]
                 items-center justify-center

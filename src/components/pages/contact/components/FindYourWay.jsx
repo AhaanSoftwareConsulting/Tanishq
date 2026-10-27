@@ -34,12 +34,12 @@ const BranchButton = ({ branch, isActive, onSelect }) => (
   </button>
 );
 
-const FindYourWay = () => {
+ const FindYourWay = ({ id }) => {
   const [activeId, setActiveId] = useState(branches[0].id);
   const activeBranch = branches.find((b) => b.id === activeId);
 
   return (
-    <section className="overflow-hidden bg-[#FFFAF2] px-5 py-14 sm:px-8 lg:px-0 lg:pb-20 lg:pt-20">
+    <section id={id} className="overflow-hidden bg-[#FFFAF2] px-5 py-14 sm:px-8 lg:px-0 lg:pb-20 lg:pt-20">
       <div className="mx-auto w-full max-w-[1400px] lg:px-14">
         {/* SECTION HEADER */}
         <div className="mx-auto max-w-[700px] text-center">
