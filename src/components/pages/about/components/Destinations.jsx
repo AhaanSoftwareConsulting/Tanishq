@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import HoChiMinhImage from "../../../../assets/HomepageBanner.png";
-import DaNangImage from "../../../../assets/da-nang-restaurant.jpg";
+import DaNangImage from "../../../../assets/da-nang-restaurant.jpeg";
 
 const destinations = [
   {
