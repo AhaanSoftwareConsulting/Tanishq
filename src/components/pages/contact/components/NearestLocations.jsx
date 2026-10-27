@@ -38,12 +38,12 @@ const locations = [
     info: [
       {
         type: "address",
-        label: "Address coming soon:",
-        text: "Da Nang City, Vietnam",
+        text: "46 Phan Tôn, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam",
       },
-      { type: "phone", text: "Contact number coming soon" },
-      { type: "hours", label: "Opening Hours:", text: "To be announced" },
+      { type: "phone", text: "+84 70 298 5336" },
+      { type: "hours", label: "Opening Hours:", text: "Mon – Sun : 8:00 AM – 12:00 AM" },
     ],
+ 
   },
 ];
 
