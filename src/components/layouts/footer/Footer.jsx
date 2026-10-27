@@ -43,6 +43,19 @@ const Footer = () => {
     }
   };
 
+  const shops = [
+    {
+      id: "hcm",
+      address: "258 Lý Tự Trọng, Bến Thành, Hồ Chí Minh 700000, Vietnam",
+      mapLink: "https://maps.app.goo.gl/g1FdKeZTuikwJbwy7",
+    },
+    {
+      id: "danang",
+      address: "46 Phan Tôn, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam",
+      mapLink: "https://maps.app.goo.gl/rVxTteC3uZE2htiC8",
+    },
+  ];
+
   return (
     <footer className="w-full bg-[#2F2116]">
       {/* Main Footer Content: Maximum Width 1400px */}
@@ -149,44 +162,45 @@ const Footer = () => {
           </div>
 
           {/* Shop Location */}
+          {/* Shop Location */}
           <div className="flex flex-col items-start">
             <h3
               className="
-                inline-block
-                min-w-[255px]
-                border-b border-white/40
-                pb-[7px]
-                font-['Fraunces']
-                text-[18px]
-                font-semibold
-                leading-[1.3]
-                text-[#FFFCF7]
-              "
+      inline-block
+      min-w-[255px]
+      border-b border-white/40
+      pb-[7px]
+      font-['Fraunces']
+      text-[18px]
+      font-semibold
+      leading-[1.3]
+      text-[#FFFCF7]
+    "
             >
               Shop Location
             </h3>
 
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=258+Ly+Tu+Trong+Ben+Thanh+Ward+District+1+Ho+Chi+Minh+City"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                mt-3
-                max-w-[280px]
-                font-['Work_Sans']
-                text-[15px]
-                leading-[1.9]
-                text-[#D6C9BA]
-                transition-colors duration-300
-                hover:text-white
-              "
-            >
-              258 Lý Tự Trọng, Bến Thành
-              <br />
-              Ward, District 1, Ho Chi Minh
-              <br />
-              City
-            </a>
+            <div className="mt-3 flex flex-col gap-5">
+              {shops.map((shop) => (
+                <a
+                  key={shop.id}
+                  href={shop.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+          max-w-[280px]
+          font-['Work_Sans']
+          text-[15px]
+          leading-[1.9]
+          text-[#D6C9BA]
+          transition-colors duration-300
+          hover:text-white
+        "
+                >
+                  {shop.address}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
