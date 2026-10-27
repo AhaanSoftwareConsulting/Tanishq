@@ -7,27 +7,27 @@ const galleryImages = [
   {
     id: 1,
     title: "Cozy Dining Interior",
-    url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
+    url: "https://admin.tanishqindianrestaurant.com/wp-content/uploads/2026/10/Resturent-inside-2-scaled.jpg"
   },
   {
     id: 2,
     title: "Traditional Street Food Prep",
-    url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80"
+    url: "https://admin.tanishqindianrestaurant.com/wp-content/uploads/2026/10/resturent-inside.jpg"
   },
   {
     id: 3,
     title: "Warm Seating Area",
-    url: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"
+    url: "https://admin.tanishqindianrestaurant.com/wp-content/uploads/2026/10/Da-Nang-Resturent.jpeg"
   },
   {
     id: 4,
     title: "Delicious Thali Presentation",
-    url: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80"
+    url: "https://admin.tanishqindianrestaurant.com/wp-content/uploads/2026/10/Da-Nang-Resturent-outer.jpeg"
   },
   {
     id: 5,
     title: "Ambience & Lighting",
-    url: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
+    url: "https://admin.tanishqindianrestaurant.com/wp-content/uploads/2026/10/Da-Nang-Resturent-2.jpeg"
   }
 ];
 

@@ -2,8 +2,8 @@ import React from "react";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
-import DaNangRestaurant from "../../../../assets/da-nang-restaurant.jpg";
-
+import DaNangRestaurant from "../../../../assets/da-nang-restaurant.jpeg";
+import DaNangRestaurant2 from "../../../../assets/da-nang-restaurant-2.jpeg";
 const NewOpening = () => {
   return (
     <section className="overflow-hidden bg-[#F8ECDD] px-5 py-14 sm:px-8 md:py-16 lg:px-12 lg:py-20">
@@ -115,7 +115,7 @@ const NewOpening = () => {
                 <div className="relative -mt-10 w-[105px] shrink-0 rotate-[5deg] border-[4px] border-white bg-white shadow-md sm:-mt-12 sm:w-[125px]">
 
                   <img
-                    src={DaNangRestaurant}
+                    src={DaNangRestaurant2}
                     alt="Indian cuisine"
                     loading="lazy"
                     className="aspect-square w-full object-cover"
