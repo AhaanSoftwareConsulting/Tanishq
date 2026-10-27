@@ -13,7 +13,8 @@ const locations = [
     image: HoChiMinhImage,
     imageAlt: "Tanishq Indian Restaurant in Ho Chi Minh City",
     imagePosition: "left",
-    mapQuery: "258 Lý Tự Trọng, Ho Chi Minh City",
+
+    profileUrl: "https://www.google.com/search?sca_esv=a6b1ccf14cf58966&rlz=1CAZYBT_enIN1200&sxsrf=APpeQnuo11cBEm5qL-YUXXGeXEzlgikaMg:1793094502085&q=tanishq+restaurant+vietnam&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_1S3GLULh7oSgEsRKsVmI_G6E5lI2-gyELhFZJek3Go3d1BtT6mXpaPoZiMZkPpMwp0xhOP5dXayfck9NHaWINVSgS_feJldgOJcbT3PePqG-0O0mCP8br0w0tTwgGokOkT2WhI%3D&sa=X&ved=2ahUKEwiSp-HG9dmXAxU2T2wGHagnPHEQrrQLegQIIBAA&biw=1200&bih=581&dpr=1.6",
     info: [
       { type: "address", text: "258 Lý Tự Trọng, Ho Chi Minh City" },
       { type: "phone", text: "+84 775 019 036" },
@@ -32,7 +33,8 @@ const locations = [
     imageAlt: "Tanishq Indian Restaurant in Da Nang",
     imagePosition: "right",
     isNew: true,
-    mapQuery: "Da Nang City, Vietnam",
+
+    profileUrl: "https://www.google.com/search?q=tanishq+indian+vegetarian+restaurant+Da+nang&sca_esv=a6b1ccf14cf58966&rlz=1CAZYBT_enIN1200&biw=1200&bih=581&sxsrf=APpeQnuADjNwCuVhgdEox-JqsfeXpSTkpg%3A1793094619905&ei=23Pgav7mNpigseMP6ZPWuQQ&uact=5&oq=tanishq+indian+vegetarian+restaurant+Da+nang&gs_lp=Egxnd3Mtd2l6LXNlcnAiLHRhbmlzaHEgaW5kaWFuIHZlZ2V0YXJpYW4gcmVzdGF1cmFudCBEYSBuYW5nMgQQIxgnMggQABiABBiiBDIFEAAY7wVIlAVQrgNYrgNwAXgBkAEAmAHUAaAB1AGqAQMyLTG4AQPIAQD4AQGYAgKgAvEBwgIKEAAYRxjWBBiwA8ICFxAuGNwGGLgGGNoGGNgCGMgDGLAD2AEBmAMAiAYBkAYKugYECAEYGZIHBTEuMC4xoAe6A7IHAzItMbgH3wHCBwUyLTEuMcgHE4AIAQ&sclient=gws-wiz-serp#lrd=0x31752f005cdd2991:0x5e8b095e1f1ff220,1",
     info: [
       {
         type: "address",
@@ -96,17 +98,22 @@ const InfoRow = ({ item }) => {
     </div>
   );
 };
+const phoneNumber = "919328695463";
 
-const LocationButtons = ({ mapQuery }) => {
+const message = encodeURIComponent(
+  "Hello Tanishq Indian Vegetarian Restaurant! I would like to know more."
+);
+
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+const LocationButtons = ({ profileUrl }) => {
   const base =
     "inline-flex h-[52px] min-w-[150px] items-center justify-center rounded-full px-8 font-sans text-[15px] font-medium transition-colors duration-300 lg:h-[60px] lg:min-w-[180px] lg:text-[16px]";
 
   return (
     <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-9">
       <a
-        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          mapQuery
-        )}`}
+        href={profileUrl}
         target="_blank"
         rel="noopener noreferrer"
         className={`${base} bg-[#5E3A17] text-white hover:bg-[#4A2D11]`}
@@ -114,12 +121,16 @@ const LocationButtons = ({ mapQuery }) => {
         Get Directions
       </a>
 
-      <Link
-        to="/contact"
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+        title="Chat with us on WhatsApp"
         className={`${base} border border-[#8C6A48] text-[#5E3A17] hover:bg-[#5E3A17] hover:text-white`}
       >
         Reserve Table
-      </Link>
+      </a>
     </div>
   );
 };
@@ -133,7 +144,7 @@ const LocationRow = ({ location }) => {
     imagePosition,
     isNew,
     info,
-    mapQuery,
+    profileUrl
   } = location;
 
   const isImageLeft = imagePosition === "left";
@@ -169,7 +180,7 @@ const LocationRow = ({ location }) => {
         ))}
       </div>
 
-      <LocationButtons mapQuery={mapQuery} />
+      <LocationButtons profileUrl={profileUrl} />
     </div>
   );
 
