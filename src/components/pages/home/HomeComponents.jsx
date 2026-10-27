@@ -18,7 +18,7 @@ const HomeComponents = () => {
       <OurStorySection />
       <NewOpening />
       <AuthenticFlavours />
-      <MenuCategories />
+      {/* <MenuCategories /> */}
       <VegetarianDining />
       <RestaurantGlimpse />
       <GuestReviews />
