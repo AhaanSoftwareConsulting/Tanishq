@@ -5,17 +5,25 @@ const branches = [
   {
     id: "hcm",
     label: "Ho Chi Minh City",
-    mapQuery: "258 Lý Tự Trọng, Ho Chi Minh City",
+    mapQuery: "10.7719456,106.6939273",
+    embedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.0309!2d106.6939273!3d10.7719456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f005cdd2991%3A0x5e8b095e1f1ff220!2sTanishq%20Indian%20Vegetarian%20Restaurant!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s",
+    mapLink: "https://maps.app.goo.gl/SpY3WLFAzeKVkNDi7",
   },
   {
     id: "danang",
     label: "Da Nang City",
-    mapQuery: "Da Nang City, Vietnam", // TODO: replace with exact address when ready
+    mapQuery: "16.0525833,108.2451733",
+    embedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.2485!2d108.2451733!3d16.0525833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142177869fd16cd%3A0x1178c69997389d2b!2sTanishq%20Indian%20Vegetarian%20Restaurant%20Da%20Nang!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s",
+    mapLink: "https://maps.app.goo.gl/7QwJB9d7Yjo3nQDy9",
   },
 ];
 
-const getMapSrc = (query) =>
-  `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=16&output=embed`;
+// Uses the official embed if available, otherwise falls back to the coordinates
+const getMapSrc = (branch) =>
+  branch.embedUrl ||
+  `https://www.google.com/maps?q=${encodeURIComponent(branch.mapQuery)}&z=17&hl=en&output=embed`;
 
 const BranchButton = ({ branch, isActive, onSelect }) => (
   <button
@@ -73,12 +81,24 @@ const BranchButton = ({ branch, isActive, onSelect }) => (
           <iframe
             key={activeBranch.id}
             title={`Tanishq ${activeBranch.label} location map`}
-            src={getMapSrc(activeBranch.mapQuery)}
+            src={getMapSrc(activeBranch)}
             className="h-full w-full border-0"
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
+        </div>
+
+        {/* OPEN IN GOOGLE MAPS LINK */}
+        <div className="mt-6 text-center">
+          <a
+            href={activeBranch.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block cursor-pointer rounded-full bg-[#5E3A17] px-7 py-3 font-sans text-[15px] font-medium text-white transition-colors duration-200 hover:bg-[#472a12]"
+          >
+            Open in Google Maps
+          </a>
         </div>
       </div>
     </section>
