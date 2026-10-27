@@ -459,7 +459,7 @@ const Footer = () => {
             "
           >
             <a
-              href="https://www.facebook.com/"
+              href="https://www.facebook.com/tanishqvegrestaurant"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -480,7 +480,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/tanishq_indian_veg_restaurant/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

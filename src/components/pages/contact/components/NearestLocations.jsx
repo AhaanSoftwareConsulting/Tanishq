@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Phone, Clock } from "@phosphor-icons/react";
 
 import HoChiMinhImage from "../../../../assets/HomepageBanner.png";
-import DaNangImage from "../../../../assets/da-nang-restaurant.jpg";
+import DaNangImage from "../../../../assets/da-nang-restaurant.jpeg";
 
 const locations = [
   {
