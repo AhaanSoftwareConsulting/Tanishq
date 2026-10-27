@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Phone, EnvelopeSimple, MapPin } from "@phosphor-icons/react";
 
 const contactCards = [
@@ -17,7 +17,7 @@ const contactCards = [
     buttonLabel: "Send an Email",
     Icon: EnvelopeSimple,
     iconWeight: "fill",
-    href: "mailto:hello@tanishq.com", // TODO: replace with real email
+    href: "mailto:tanishqveg@gmail.com", // TODO: replace with real email
   },
   {
     title: "Visit Us",
@@ -25,7 +25,7 @@ const contactCards = [
     buttonLabel: "View Locations",
     Icon: MapPin,
     iconWeight: "regular",
-    to: "#", // internal route
+    to: "#find-your-way", // internal route
   },
 ];
 
@@ -33,7 +33,21 @@ const buttonClass =
   "inline-flex h-[62px] items-center justify-center rounded-full bg-[#5E3A17] px-8 font-sans text-[17px] font-medium text-white transition-colors duration-300 hover:bg-[#4A2D11]";
 
 const ContactCard = ({ card }) => {
+  const navigate = useNavigate();
   const { title, description, buttonLabel, Icon, iconWeight, href, to } = card;
+
+  const handleLocationClick = (event) => {
+    if (to === "#find-your-way") {
+      event.preventDefault();
+
+      document.getElementById("find-your-way")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      window.history.replaceState(null, "", "#find-your-way");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center rounded-[24px] border-2 border-[#EFE3D0] px-6 pb-6 pt-6 text-center">
@@ -55,7 +69,7 @@ const ContactCard = ({ card }) => {
       {/* BUTTON */}
       <div className="mt-5">
         {to ? (
-          <Link to={to} className={buttonClass}>
+          <Link to={to} className={buttonClass} onClick={handleLocationClick}>
             {buttonLabel}
           </Link>
         ) : (
