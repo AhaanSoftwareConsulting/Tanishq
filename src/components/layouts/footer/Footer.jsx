@@ -160,7 +160,7 @@ const Footer = () => {
               +84 775 019 036
             </a>
             <a
-              href="tel:+84 70 298 5336"
+              href="tel:+84702985336"
               className="
                 mt-5
                 font-['Work_Sans']

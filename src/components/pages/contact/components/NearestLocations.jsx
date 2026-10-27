@@ -41,7 +41,7 @@ const locations = [
         text: "46 Phan Tôn, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam",
       },
       { type: "phone", text: "+84 70 298 5336" },
-      { type: "hours", label: "Opening Hours:", text: "Mon – Sun : 8:00 AM – 12:00 AM (Midnight)" },
+      { type: "hours", label: "Opening Hours:", text: "Mon – Sun : 8:00 AM – 12:00 AM" },
     ],
   },
 ];
