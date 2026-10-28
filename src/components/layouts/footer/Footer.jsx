@@ -159,6 +159,21 @@ const Footer = () => {
             >
               +84 775 019 036
             </a>
+            <a
+              href="tel:+84702985336"
+              className="
+                mt-5
+                font-['Work_Sans']
+                text-[16px]
+                font-medium
+                leading-[1.5]
+                text-[#F5EDE3]
+                transition-colors duration-300
+                hover:text-[#D8AE70]
+              "
+            >
+              +84 70 298 5336
+            </a>
           </div>
 
           {/* Shop Location */}
