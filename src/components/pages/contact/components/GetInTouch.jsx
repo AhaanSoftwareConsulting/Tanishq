@@ -94,7 +94,7 @@ const GetInTouch = () => {
 
           <p className="mx-auto mt-5 max-w-[740px] font-sans text-[16px] font-normal leading-[26px] text-[#7A7167] lg:text-[18px] lg:leading-[28px]">
             At Tanishq, every dish carries the taste of India. Fresh spices,
-            family recipes and a warm welcome, right here in Ho Chi Minh City.
+            family recipes and a warm welcome, right here in Vietnam.
           </p>
         </div>
 

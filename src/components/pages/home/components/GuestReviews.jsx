@@ -120,13 +120,6 @@ const GuestReviews = () => {
           ))}
         </div>
 
-        {/* Bottom Call To Action Button */}
-        <div className="mt-12 text-center">
-          <button className="cursor-pointer bg-[#5c3718] hover:bg-[#472a12] text-white text-sm font-medium py-3.5 px-8 rounded-full transition-colors duration-200 shadow-sm">
-            Leave us a review
-          </button>
-        </div>
-
       </div>
     </section>
   );

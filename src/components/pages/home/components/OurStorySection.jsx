@@ -18,7 +18,7 @@ const OurStorySection = () => {
         {/* Subtitle Description */}
         <p className="text-xs sm:text-sm md:text-base text-[#735d4d] max-w-2xl mx-auto leading-relaxed mb-8">
           At Tanishq, every dish carries the taste of India. Fresh spices, family recipes and a
-          warm welcome, right here in Ho Chi Minh City.
+          warm welcome, right here in Vietnam.
         </p>
 
         {/* Read Our Story CTA Button */}
