@@ -1,11 +1,11 @@
 const API_BASE_URL =
-  "https://admin.tanishqindianrestaurant.com/wp-json/wp/v2";
+  "https://adminpanel.tanishqindianrestaurant.com/wp-json/wp/v2";
 
 const RESERVATION_API_URL =
-  "https://admin.tanishqindianrestaurant.com/wp-json/tanishq/v1/reservations";
+  "https://adminpanel.tanishqindianrestaurant.com/wp-json/tanishq/v1/reservations";
 
 const CONTACT_API_URL =
-  "https://admin.tanishqindianrestaurant.com/wp-json/tanishq/v1/contact";
+  "https://adminpanel.tanishqindianrestaurant.com/wp-json/tanishq/v1/contact";
 
 // Common WordPress API fetch
 const wordpressFetch = async (endpoint) => {

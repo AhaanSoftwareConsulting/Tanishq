@@ -7,12 +7,12 @@ import logo from "../../../assets/CompanyLogo.png";
 const leftNavLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { name: "Menu", path: "/menu" },
-  { name: "Blog", path: "/blog" },
+  // { name: "Menu", path: "/menu" },
+  // { name: "Blog", path: "/blog" },
 ];
 
 const rightNavLinks = [
-  { name: "Gallery", path: "/gallery" },
+  // { name: "Gallery", path: "/gallery" },
   { name: "Contact Us", path: "/contact" },
 ];
 

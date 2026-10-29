@@ -138,34 +138,73 @@ const MenuSection = () => {
     "";
 
   // Get menu entries from WordPress / ACF
-  const getMenuEntries = (item) => {
-    const entries =
-      item?.menu_entries ??
-      item?.acf?.menu_entries ??
-      item?.acf?.menu_items ??
-      item?.acf?.menu_item ??
-      [];
+  // const getMenuEntries = (item) => {
+  //   const entries =
+  //     item?.menu_entries ??
+  //     item?.acf?.menu_entries ??
+  //     item?.acf?.menu_items ??
+  //     item?.acf?.menu_item ??
+  //     [];
 
-    if (!Array.isArray(entries)) return [];
+  //   if (!Array.isArray(entries)) return [];
 
-    return entries
-      .filter(
-        (entry) =>
-          entry &&
-          typeof entry === "object" &&
-          (entry.menu_name ||
-            entry.name ||
-            entry.menu_subname ||
-            entry.subtitle ||
-            entry.price !== undefined),
-      )
-      .map((entry, index) => ({
-        id: `${item.id}-${index}`,
-        menu_name: decodeHTML(entry.menu_name || entry.name || "Menu Item"),
-        menu_subname: decodeHTML(entry.menu_subname || entry.subtitle || ""),
-        price: entry.price ?? "",
-      }));
-  };
+  //   return entries
+  //     .filter(
+  //       (entry) =>
+  //         entry &&
+  //         typeof entry === "object" &&
+  //         (entry.menu_name ||
+  //           entry.name ||
+  //           entry.menu_subname ||
+  //           entry.subtitle ||
+  //           entry.price !== undefined),
+  //     )
+  //     .map((entry, index) => ({
+  //       id: `${item.id}-${index}`,
+  //       menu_name: decodeHTML(entry.menu_name || entry.name || "Menu Item"),
+  //       menu_subname: decodeHTML(entry.menu_subname || entry.subtitle || ""),
+  //       price: entry.price ?? "",
+  //     }));
+  // };
+
+
+// Get menu entries from WordPress repeater field
+const getMenuEntries = (item) => {
+  const entries =
+    item?.menu_items_data ??
+    item?.menu_entries ??
+    item?.acf?.menu_items_data ??
+    item?.acf?.menu_entries ??
+    item?.acf?.menu_items ??
+    item?.acf?.menu_item ??
+    [];
+
+  if (!Array.isArray(entries)) {
+    return [];
+  }
+
+  return entries
+    .filter(
+      (entry) =>
+        entry &&
+        typeof entry === "object"
+    )
+    .map((entry, index) => ({
+      id: `${item.id}-${index}`,
+      menu_name: decodeHTML(
+        entry.name || entry.menu_name || "Menu Item"
+      ),
+      menu_subname: decodeHTML(
+        entry.subname ||
+          entry.menu_subname ||
+          entry.subtitle ||
+          ""
+      ),
+      price: entry.price ?? "",
+    }))
+    .filter((entry) => entry.menu_name.trim() !== "");
+};
+
 
   // Categories
   const categories = useMemo(() => {
