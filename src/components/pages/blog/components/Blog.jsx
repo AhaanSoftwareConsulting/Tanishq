@@ -200,7 +200,7 @@ const Blog = () => {
 
                     {/* Featured Image */}
                     <div className="relative p-3 pb-0">
-                      <div className="relative h-56 overflow-hidden rounded-[18px] border border-white/70 bg-[#E9DDCC]/70 sm:h-60">
+                      <div className="relative h-auto overflow-hidden rounded-[18px] border border-white/70 bg-[#E9DDCC]/70 sm:h-60">
                         {image ? (
                           <img
                             src={image}
