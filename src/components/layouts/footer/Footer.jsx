@@ -2,11 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import {
-  FacebookLogo,
-  InstagramLogo,
-  CaretRight,
-} from "@phosphor-icons/react";
+import { FacebookLogo, InstagramLogo, CaretRight } from "@phosphor-icons/react";
+import { WhatsappLogo, ChatCircleDots, PhoneCall } from "@phosphor-icons/react";
 
 import logo from "../../../assets/CompanyLogo.png";
 
@@ -112,7 +109,7 @@ const Footer = () => {
                 className="
                   font-['Work_Sans']
                   text-[15px]
-                  leading-[1.4]
+                  leading-[0.8]
                   text-[#F5EDE3]
                   transition-colors duration-300
                   hover:text-[#D8AE70]
@@ -128,57 +125,47 @@ const Footer = () => {
         <div className="flex flex-col items-start gap-10">
           {/* Contact Us */}
           <div className="flex flex-col items-start">
-            <h3
-              className="
-                inline-block
-                min-w-[162px]
-                border-b border-white/40
-                pb-[7px]
-                font-['Fraunces']
-                text-[18px]
-                font-semibold
-                leading-[1.3]
-                text-[#FFFCF7]
-              "
-            >
-              Contact Us
-            </h3>
-
+            {" "}
+            <h3 className=" inline-block min-w-[162px] border-b border-white/40 pb-[7px] font-['Fraunces'] text-[18px] font-semibold leading-[1.3] text-[#FFFCF7] ">
+              {" "}
+              Contact Us{" "}
+            </h3>{" "}
+            {/* WhatsApp */}{" "}
             <a
-              href="tel:+84775019036"
-              className="
-                mt-5
-                font-['Work_Sans']
-                text-[16px]
-                font-medium
-                leading-[1.5]
-                text-[#F5EDE3]
-                transition-colors duration-300
-                hover:text-[#D8AE70]
-              "
+              href="https://wa.me/919328695463"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" mt-5 flex items-center gap-3 font-['Work_Sans'] text-[16px] font-medium leading-[1.5] text-[#F5EDE3] transition-colors duration-300 hover:text-[#D8AE70] "
             >
-              +84 775 019 036
-            </a>
+              {" "}
+              <WhatsappLogo size={21} weight="regular" />{" "}
+              <span>+91 93286 95463</span>{" "}
+            </a>{" "}
+            {/* Zalo */}{" "}
             <a
-              href="tel:+84702985336"
-              className="
-                mt-5
-                font-['Work_Sans']
-                text-[16px]
-                font-medium
-                leading-[1.5]
-                text-[#F5EDE3]
-                transition-colors duration-300
-                hover:text-[#D8AE70]
-              "
+              href="https://zalo.me/919328695463"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" mt-5 flex items-center gap-3 font-['Work_Sans'] text-[16px] font-medium leading-[1.5] text-[#F5EDE3] transition-colors duration-300 hover:text-[#D8AE70] "
             >
-              +84 70 298 5336
-            </a>
+              {" "}
+              <ChatCircleDots size={21} weight="regular" />{" "}
+              <span>+91 93286 95463</span>{" "}
+            </a>{" "}
+            {/* Viber */}{" "}
+            <a
+              href="viber://chat?number=%2B919328695463"
+              className=" mt-5 flex items-center gap-3 font-['Work_Sans'] text-[16px] font-medium leading-[1.5] text-[#F5EDE3] transition-colors duration-300 hover:text-[#D8AE70] "
+            >
+              {" "}
+              <PhoneCall size={21} weight="regular" />{" "}
+              <span>+91 93286 95463</span>{" "}
+            </a>{" "}
           </div>
 
           {/* Shop Location */}
           {/* Shop Location */}
-          <div className="flex flex-col items-start">
+          {/* <div className="flex flex-col items-start">
             <h3
               className="
       inline-block
@@ -216,165 +203,49 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Newsletter */}
         <div className="flex w-full flex-col items-start">
-          <h3
-            className="
-              font-['Fraunces']
-              text-[18px]
-              font-semibold
-              leading-[1.3]
-              text-[#FFFCF7]
-            "
-          >
-            Subscribe
-          </h3>
+           <h3
+              className="
+      inline-block
+      min-w-[255px]
+      border-b border-white/40
+      pb-[7px]
+      font-['Fraunces']
+      text-[18px]
+      font-semibold
+      leading-[1.3]
+      text-[#FFFCF7]
+    "
+            >
+              Shop Location
+            </h3>
 
-          <p
-            className="
-              mt-4
-              max-w-[400px]
-              font-['Work_Sans']
-              text-[15px]
-              leading-[1.8]
-              text-[#D6C9BA]
-            "
-          >
-            Sign up for the latest updates and exclusive offers from us.
-          </p>
-
-          {/* React Hook Form */}
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mt-5 w-full"
-            noValidate
-          >
-            {/* Full Name */}
-            <div className="w-full">
-              <input
-                type="text"
-                placeholder="Full Name*"
-                aria-label="Full Name"
-                autoComplete="name"
-                aria-invalid={Boolean(errors.fullName)}
-                {...register("fullName", {
-                  required: "Please enter your full name.",
-                  minLength: {
-                    value: 2,
-                    message: "Name must contain at least 2 characters.",
-                  },
-                })}
-                className="
-                  h-[52px]
-                  w-full
-                  border-b border-white/60
-                  bg-transparent
-                  px-3
-                  font-['Work_Sans']
-                  text-[15px]
-                  text-white
-                  outline-none
-                  transition-colors duration-300
-                  placeholder:text-[#F5EDE3]
-                  focus:border-[#D8AE70]
-                "
-              />
-
-              {errors.fullName && (
-                <p className="mt-2 text-xs text-red-300">
-                  {errors.fullName.message}
-                </p>
-              )}
-            </div>
-
-            {/* Email Address */}
-            <div className="mt-3 w-full">
-              <div
-                className="
-                  flex
-                  h-[52px]
-                  w-full
-                  items-center
-                  border-b border-white/60
-                  transition-colors duration-300
-                  focus-within:border-[#D8AE70]
-                "
-              >
-                <input
-                  type="email"
-                  placeholder="Email Address*"
-                  aria-label="Email Address"
-                  autoComplete="email"
-                  aria-invalid={Boolean(errors.email)}
-                  {...register("email", {
-                    required: "Please enter your email address.",
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Please enter a valid email address.",
-                    },
-                  })}
+            <div className="mt-3 flex flex-col gap-5">
+              {shops.map((shop) => (
+                <a
+                  key={shop.id}
+                  href={shop.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="
-                    h-full
-                    min-w-0
-                    flex-1
-                    bg-transparent
-                    px-3
-                    font-['Work_Sans']
-                    text-[15px]
-                    text-white
-                    outline-none
-                    placeholder:text-[#F5EDE3]
-                  "
-                />
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  aria-label="Subscribe to newsletter"
-                  className="
-                    mr-3
-                    flex h-[24px] w-[24px] shrink-0
-                    items-center justify-center
-                    rounded-[3px]
-                    bg-[#FFFCF7]
-                    text-[#603912]
-                    transition-colors duration-300
-                    hover:bg-[#D8AE70]
-                    disabled:cursor-not-allowed
-                    disabled:opacity-60
-                  "
+          max-w-[280px]
+          font-['Work_Sans']
+          text-[15px]
+          leading-[1.9]
+          text-[#D6C9BA]
+          transition-colors duration-300
+          hover:text-white
+        "
                 >
-                  <CaretRight size={18} weight="bold" />
-                </button>
-              </div>
-
-              {errors.email && (
-                <p className="mt-2 text-xs text-red-300">
-                  {errors.email.message}
-                </p>
-              )}
+                  {shop.address}
+                </a>
+              ))}
             </div>
-
-            {/* Submission Feedback */}
-            {submitMessage && (
-              <p
-                role="status"
-                aria-live="polite"
-                className="
-                  mt-4
-                  font-['Work_Sans']
-                  text-sm
-                  text-[#E8C99D]
-                "
-              >
-                {submitMessage}
-              </p>
-            )}
-          </form>
-        </div>
+          </div>
       </div>
 
       {/* Bottom Bar: Full Viewport Width */}
