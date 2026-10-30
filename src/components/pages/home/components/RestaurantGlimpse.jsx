@@ -62,14 +62,14 @@ const RestaurantGlimpse = () => {
         </h2>
 
         {/* Gallery button */}
-        <div className="mb-12 sm:mb-16">
+        {/* <div className="mb-12 sm:mb-16">
           <Link
             to="/gallery"
             className="inline-block cursor-pointer bg-[#5c3718] hover:bg-[#472a12] text-white text-xs md:text-sm font-medium py-3 px-7 rounded-full transition-colors duration-200 shadow-sm tracking-wide"
           >
             See Full Gallery
           </Link>
-        </div>
+        </div> */}
 
         {/* Image carousel */}
         <div className="relative mx-auto flex gap-4 min-h-[260px] w-full max-w-[1280px] items-center justify-center overflow-hidden lg:min-h-[400px] xl:min-h-[516px]">

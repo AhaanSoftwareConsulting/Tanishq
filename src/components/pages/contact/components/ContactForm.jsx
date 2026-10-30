@@ -39,35 +39,25 @@ const ContactForm = () => {
 
     try {
       // 1. Send the enquiry email to the restaurant
-      await emailjs.send(
-        SERVICE_ID,
-        CONTACT_TEMPLATE_ID,
-        templateParams,
-        {
-          publicKey: PUBLIC_KEY,
-        }
-      );
+      await emailjs.send(SERVICE_ID, CONTACT_TEMPLATE_ID, templateParams, {
+        publicKey: PUBLIC_KEY,
+      });
 
       // 2. Send a thank-you email to the customer
       try {
-        await emailjs.send(
-          SERVICE_ID,
-          AUTOREPLY_TEMPLATE_ID,
-          templateParams,
-          {
-            publicKey: PUBLIC_KEY,
-          }
-        );
+        await emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE_ID, templateParams, {
+          publicKey: PUBLIC_KEY,
+        });
 
         setSuccessMessage(
-          "Thank you for contacting us! Your message has been sent successfully. A confirmation email has also been sent to you."
+          "Thank you for contacting us! Your message has been sent successfully. A confirmation email has also been sent to you.",
         );
       } catch (autoReplyError) {
         console.error("Auto-reply email failed:", autoReplyError);
 
         // The restaurant email was already sent successfully.
         setSuccessMessage(
-          "Thank you for contacting us! Your message has been sent successfully."
+          "Thank you for contacting us! Your message has been sent successfully.",
         );
       }
 
@@ -76,15 +66,14 @@ const ContactForm = () => {
       console.error("Contact email failed:", error);
 
       setErrorMessage(
-        "Sorry, we could not send your message. Please try again later."
+        "Sorry, we could not send your message. Please try again later.",
       );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const labelClass =
-    "mb-2 block text-sm font-medium text-[#2F2116]";
+  const labelClass = "mb-2 block text-sm font-medium text-[#2F2116]";
 
   const inputClass =
     "w-full rounded-lg border border-[#D8C7B5] bg-white/80 px-4 py-3 text-sm text-[#2F2116] outline-none transition placeholder:text-[#9A8979] focus:border-[#A66B32] focus:ring-2 focus:ring-[#A66B32]/20";
@@ -94,7 +83,6 @@ const ContactForm = () => {
   return (
     <section className="w-full bg-[#F7ECDD] py-16 sm:py-20 lg:py-24">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
-
         {/* Left Side - Image */}
         <div className="relative overflow-hidden rounded-2xl">
           <img
@@ -115,8 +103,8 @@ const ContactForm = () => {
             </h2>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-white/85 sm:text-base">
-              Have a question, a special request, or need assistance?
-              Send us a message and our team will be happy to help.
+              Have a question, a special request, or need assistance? Send us a
+              message and our team will be happy to help.
             </p>
           </div>
         </div>
@@ -133,15 +121,12 @@ const ContactForm = () => {
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-[#705C49] sm:text-base">
-              Fill out the form below and let us know how we can assist you.
-              We look forward to hearing from you.
+              Fill out the form below and let us know how we can assist you. We
+              look forward to hearing from you.
             </p>
           </div>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 ">
             {/* Name */}
             <div>
               <label htmlFor="name" className={labelClass}>
@@ -200,24 +185,48 @@ const ContactForm = () => {
                 Phone Number <span className="text-red-500">*</span>
               </label>
 
-              <input
-                id="phone"
-                type="tel"
-                placeholder="Enter your phone number"
-                autoComplete="tel"
-                className={inputClass}
-                {...register("phone", {
-                  required: "Please enter your phone number.",
-                  minLength: {
-                    value: 7,
-                    message: "Phone number must contain at least 7 characters.",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Phone number cannot exceed 20 characters.",
-                  },
-                })}
-              />
+         
+<input
+  id="phone"
+  type="tel"
+  inputMode="numeric"
+  placeholder="Enter your phone number"
+  autoComplete="tel"
+  className={inputClass}
+  {...register("phone", {
+    required: "Please enter your phone number.",
+    pattern: {
+      value: /^[0-9]*$/,
+      message: "Please enter numbers only.",
+    },
+    validate: (value) => {
+      if (value.length > 0 && value.length < 7) {
+        return "Phone number must contain at least 7 digits.";
+      }
+
+      if (value.length > 15) {
+        return "Phone number cannot exceed 15 digits.";
+      }
+
+      return true;
+    },
+    onChange: (e) => {
+      const value = e.target.value;
+
+      if (/\D/.test(value)) {
+        e.target.value = value.replace(/\D/g, "").slice(0, 15);
+      }
+    },
+  })}
+/>
+
+{errors.phone && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.phone.message}
+  </p>
+)}
+
+
 
               {errors.phone && (
                 <p className={errorClass}>{errors.phone.message}</p>
@@ -300,7 +309,6 @@ const ContactForm = () => {
                       d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
                     />
                   </svg>
-
                   Sending...
                 </>
               ) : (
@@ -315,4 +323,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-

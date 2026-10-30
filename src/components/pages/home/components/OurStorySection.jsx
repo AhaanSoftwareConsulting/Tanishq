@@ -22,14 +22,14 @@ const OurStorySection = () => {
         </p>
 
         {/* Read Our Story CTA Button */}
-        <div className="mb-14">
+        {/* <div className="mb-14">
           <Link
             to="/about"
             className="inline-block cursor-pointer bg-[#4a2e16] hover:bg-[#331d0d] text-white text-xs md:text-sm font-medium py-3 px-8 rounded-full transition-colors duration-200 shadow-sm"
           >
             Read our story
           </Link>
-        </div>
+        </div> */}
 
         {/* Images Grid with Rotated Photo Frame Effect (Full Width & Larger Size) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start justify-center max-w-7xl mx-auto px-2">

@@ -9,7 +9,7 @@ const contactCards = [
     buttonLabel: "Call Now",
     Icon: Phone,
     iconWeight: "fill",
-    href: "tel: +8475019036", // TODO: replace with real phone number
+    href: "tel: +919328695463", // TODO: replace with real phone number
   },
   {
     title: "Email Us",
