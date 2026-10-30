@@ -17,7 +17,7 @@ const locations = [
     profileUrl: "https://www.google.com/search?sca_esv=a6b1ccf14cf58966&rlz=1CAZYBT_enIN1200&sxsrf=APpeQnuo11cBEm5qL-YUXXGeXEzlgikaMg:1793094502085&q=tanishq+restaurant+vietnam&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_1S3GLULh7oSgEsRKsVmI_G6E5lI2-gyELhFZJek3Go3d1BtT6mXpaPoZiMZkPpMwp0xhOP5dXayfck9NHaWINVSgS_feJldgOJcbT3PePqG-0O0mCP8br0w0tTwgGokOkT2WhI%3D&sa=X&ved=2ahUKEwiSp-HG9dmXAxU2T2wGHagnPHEQrrQLegQIIBAA&biw=1200&bih=581&dpr=1.6",
     info: [
       { type: "address", text: "258 Lý Tự Trọng, Ho Chi Minh City" },
-      { type: "phone", text: "+84 775 019 036" },
+      { type: "phone", text: "+91 93286 95463" },
       {
         type: "hours",
         label: "Opening Hours:",
@@ -40,9 +40,10 @@ const locations = [
         type: "address",
         text: "46 Phan Tôn, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam",
       },
-      { type: "phone", text: "+84 70 298 5336" },
+      { type: "phone", text: "+91 93286 95463" },
       { type: "hours", label: "Opening Hours:", text: "Mon – Sun : 8:00 AM – 12:00 AM" },
     ],
+ 
   },
 ];
 

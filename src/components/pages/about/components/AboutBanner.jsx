@@ -7,7 +7,7 @@ const defaultBackgroundImage =
 const AboutBanner = ({
   backgroundImage = defaultBackgroundImage,
   title = "Our Story & Tradition",
-  description = "Serving authentic Indian vegetarian cuisine made with passion, fresh ingredients, and age-old family recipes in the heart of Ho Chi Minh City.",
+  description = "Serving authentic Indian vegetarian cuisine made with passion, fresh ingredients, and age-old family recipes in the heart of Vietnam.",
 }) => {
   return (
     <section

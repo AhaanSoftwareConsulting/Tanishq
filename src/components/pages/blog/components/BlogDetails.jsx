@@ -201,14 +201,14 @@ const BlogDetails = () => {
 
             {/* Introductory Description */}
 
-            {blog.excerpt?.rendered && (
+            {/* {blog.excerpt?.rendered && (
               <div
                 className="mx-auto mt-6 max-w-3xl font-['Work_Sans'] text-base leading-8 text-[#796958] sm:mt-7 sm:text-lg sm:leading-9 [&_p]:m-0"
                 dangerouslySetInnerHTML={{
                   __html: blog.excerpt.rendered,
                 }}
               />
-            )}
+            )} */}
 
           </header>
 
