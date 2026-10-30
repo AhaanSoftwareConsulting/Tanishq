@@ -20,7 +20,7 @@ const wordpressFetch = async (endpoint) => {
 
 // Gallery API
 export const getGalleries = () =>
-  wordpressFetch("/gallery?_embed&per_page=100");
+  wordpressFetch("/galleries?_embed&per_page=100");
 
 export const getGallery = getGalleries;
 
