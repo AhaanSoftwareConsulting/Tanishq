@@ -7,6 +7,9 @@ const RESERVATION_API_URL =
 const CONTACT_API_URL =
   "https://adminpanel.tanishqindianrestaurant.com/wp-json/tanishq/v1/contact";
 
+  const VISITOR_API_URL =
+  "https://adminpanel.tanishqindianrestaurant.com/wp-json/tanishq/v1/visitor-count";
+
 // Common WordPress API fetch
 const wordpressFetch = async (endpoint) => {
   const response = await fetch(`${API_BASE_URL}${endpoint}`);
@@ -95,3 +98,23 @@ export const getBlogPostBySlug = async (slug) => {
   return posts.length > 0 ? posts[0] : null;
 };
 
+// =====================================
+// WEBSITE VISITOR COUNTER API
+// =====================================
+
+export const trackWebsiteVisit = async () => {
+  const response = await fetch(VISITOR_API_URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error("Failed to track website visit");
+  }
+
+  return result;
+};
