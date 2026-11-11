@@ -161,6 +161,15 @@ const Footer = () => {
               <PhoneCall size={21} weight="regular" />{" "}
               <span>+91 93286 95463</span>{" "}
             </a>{" "}
+            {/* Phone */}{" "}
+            <a
+              href="tel:+84775019036"
+              className=" mt-5 flex items-center gap-3 font-['Work_Sans'] text-[16px] font-medium leading-[1.5] text-[#F5EDE3] transition-colors duration-300 hover:text-[#D8AE70] "
+            >
+              {" "}
+              <PhoneCall size={21} weight="regular" />{" "}
+              <span>+84775019036</span>{" "}
+            </a>{" "}
           </div>
 
           {/* Shop Location */}
