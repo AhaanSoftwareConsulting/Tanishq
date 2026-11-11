@@ -18,6 +18,7 @@ const locations = [
     info: [
       { type: "address", text: "258 Lý Tự Trọng, Ho Chi Minh City" },
       { type: "phone", text: "+91 93286 95463" },
+      { type: "phone", text: "+84775019036" },
       {
         type: "hours",
         label: "Opening Hours:",
@@ -41,6 +42,7 @@ const locations = [
         text: "46 Phan Tôn, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam",
       },
       { type: "phone", text: "+91 93286 95463" },
+      { type: "phone", text: "+84775019036" },
       { type: "hours", label: "Opening Hours:", text: "Mon – Sun : 8:00 AM – 12:00 AM" },
     ],
  

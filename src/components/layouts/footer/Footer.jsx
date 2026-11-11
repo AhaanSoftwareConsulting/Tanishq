@@ -161,6 +161,15 @@ const Footer = () => {
               <PhoneCall size={21} weight="regular" />{" "}
               <span>+91 93286 95463</span>{" "}
             </a>{" "}
+            {/* Phone */}{" "}
+            <a
+              href="tel:+84775019036"
+              className=" mt-5 flex items-center gap-3 font-['Work_Sans'] text-[16px] font-medium leading-[1.5] text-[#F5EDE3] transition-colors duration-300 hover:text-[#D8AE70] "
+            >
+              {" "}
+              <PhoneCall size={21} weight="regular" />{" "}
+              <span>+84775019036</span>{" "}
+            </a>{" "}
           </div>
 
           {/* Shop Location */}
@@ -208,8 +217,8 @@ const Footer = () => {
 
         {/* Newsletter */}
         <div className="flex w-full flex-col items-start">
-           <h3
-              className="
+          <h3
+            className="
       inline-block
       min-w-[255px]
       border-b border-white/40
@@ -220,18 +229,18 @@ const Footer = () => {
       leading-[1.3]
       text-[#FFFCF7]
     "
-            >
-              Shop Location
-            </h3>
+          >
+            Shop Location
+          </h3>
 
-            <div className="mt-3 flex flex-col gap-5">
-              {shops.map((shop) => (
-                <a
-                  key={shop.id}
-                  href={shop.mapLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
+          <div className="mt-3 flex flex-col gap-5">
+            {shops.map((shop) => (
+              <a
+                key={shop.id}
+                href={shop.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
           max-w-[280px]
           font-['Work_Sans']
           text-[15px]
@@ -240,12 +249,12 @@ const Footer = () => {
           transition-colors duration-300
           hover:text-white
         "
-                >
-                  {shop.address}
-                </a>
-              ))}
-            </div>
+              >
+                {shop.address}
+              </a>
+            ))}
           </div>
+        </div>
       </div>
 
       {/* Bottom Bar: Full Viewport Width */}
@@ -276,22 +285,20 @@ const Footer = () => {
           "
         >
           {/* Copyright */}
-          <p
-            className="
-              order-2
-              text-center
-              font-['Work_Sans']
-              text-[12px]
-              leading-[1.8]
-              text-[#F5EDE3]
-              sm:text-[14px]
-              md:order-1
-              md:max-w-[45%]
-              md:text-left
-            "
-          >
+          <p className=" order-2 text-center font-['Work_Sans'] text-[12px] leading-[1.8] text-[#F5EDE3] sm:text-[14px] md:order-1 md:max-w-[45%] md:text-left ">
+            {" "}
             © {new Date().getFullYear()} Tanishq Indian Vegetarian Restaurant.
-            All rights reserved.
+            All rights reserved. Designed &amp; Developed by{" "}
+            <a
+              href="https://www.ahaansoftware.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold transition-colors duration-300 hover:text-[#D8AE70]"
+            >
+              {" "}
+              Ahaan Software{" "}
+            </a>{" "}
+            .{" "}
           </p>
 
           {/* Center Logo */}

@@ -3,7 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Phone, EnvelopeSimple, MapPin } from "@phosphor-icons/react";
 
-const phone = "919328695463";
+const phone = "84775019036";
+
 
 const contactCards = [
   {
@@ -58,7 +59,7 @@ const ContactCard = ({ card }) => {
         await navigator.share({
           title: "Contact Tanishq",
           text: "Contact Tanishq for reservations and inquiries:",
-          url: `https://wa.me/${phone}`,
+          url: `tel:+${phone}`,
         });
       } catch (error) {
         if (error.name !== "AbortError") {
