@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
-
+import { ArrowClockwiseIcon } from "@phosphor-icons/react";
 import ContactImage from "../../../../assets/da-nang-restaurant.jpg";
 
 // EmailJS Configuration
@@ -22,7 +22,45 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm();
 
+  const generateCaptcha = () => {
+    const characters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+    return Array.from(
+      { length: 6 },
+      () => characters[Math.floor(Math.random() * characters.length)]
+    ).join("");
+  };
+
+  // Captcha state
+  const [captchaCode, setCaptchaCode] = useState(generateCaptcha);
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
+
+  const refreshCaptcha = () => {
+    setCaptchaCode(generateCaptcha());
+    setCaptchaInput("");
+    setCaptchaError("");
+  };
+
   const onSubmit = async (data) => {
+
+    // CAPTCHA validation
+    if (
+      captchaInput.trim().toLowerCase() !==
+      captchaCode.toLowerCase()
+    ) {
+      setCaptchaError("Invalid CAPTCHA. Please try again.");
+      setCaptchaCode(generateCaptcha());
+      setCaptchaInput("");
+      return;
+    }
+
+    setCaptchaError("");
+
+    setIsSubmitting(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
     setIsSubmitting(true);
     setSuccessMessage("");
     setErrorMessage("");
@@ -185,49 +223,40 @@ const ContactForm = () => {
                 Phone Number <span className="text-red-500">*</span>
               </label>
 
-         
-<input
-  id="phone"
-  type="tel"
-  inputMode="numeric"
-  placeholder="Enter your phone number"
-  autoComplete="tel"
-  className={inputClass}
-  {...register("phone", {
-    required: "Please enter your phone number.",
-    pattern: {
-      value: /^[0-9]*$/,
-      message: "Please enter numbers only.",
-    },
-    validate: (value) => {
-      if (value.length > 0 && value.length < 7) {
-        return "Phone number must contain at least 7 digits.";
-      }
 
-      if (value.length > 15) {
-        return "Phone number cannot exceed 15 digits.";
-      }
+              <input
+                id="phone"
+                type="tel"
+                inputMode="numeric"
+                placeholder="Enter your phone number"
+                autoComplete="tel"
+                className={inputClass}
+                {...register("phone", {
+                  required: "Please enter your phone number.",
+                  pattern: {
+                    value: /^[0-9]*$/,
+                    message: "Please enter numbers only.",
+                  },
+                  validate: (value) => {
+                    if (value.length > 0 && value.length < 7) {
+                      return "Phone number must contain at least 7 digits.";
+                    }
 
-      return true;
-    },
-    onChange: (e) => {
-      const value = e.target.value;
+                    if (value.length > 15) {
+                      return "Phone number cannot exceed 15 digits.";
+                    }
 
-      if (/\D/.test(value)) {
-        e.target.value = value.replace(/\D/g, "").slice(0, 15);
-      }
-    },
-  })}
-/>
+                    return true;
+                  },
+                  onChange: (e) => {
+                    const value = e.target.value;
 
-{errors.phone && (
-  <p className="mt-1 text-sm text-red-500">
-    {errors.phone.message}
-  </p>
-)}
-
-
-
+                    if (/\D/.test(value)) {
+                      e.target.value = value.replace(/\D/g, "").slice(0, 15);
+                    }
+                  },
+                })}
+              />
               {errors.phone && (
                 <p className={errorClass}>{errors.phone.message}</p>
               )}
@@ -255,6 +284,66 @@ const ContactForm = () => {
 
               {errors.message && (
                 <p className={errorClass}>{errors.message.message}</p>
+              )}
+            </div>
+
+            {/* CAPTCHA */}
+            <div>
+              <label className={labelClass}>
+                Security Verification <span className="text-red-500">*</span>
+              </label>
+
+              <div className="flex items-center gap-3 mb-3">
+
+                {/* CAPTCHA Display */}
+                <div
+                  className="flex h-14 flex-1 items-center justify-center rounded-2xl bg-black px-4 text-xl font-bold tracking-[0.3em] text-white select-none"
+                  aria-label="CAPTCHA code"
+                >
+                  {captchaCode.split("").map((char, index) => (
+                    <span
+                      key={index}
+                      className={index % 2 === 0 ? "rotate-[-5deg]" : "rotate-[5deg]"}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Refresh Button */}
+                <button
+                  type="button"
+                  onClick={refreshCaptcha}
+                  className="flex h-14 shrink-0 items-center gap-2 rounded-2xl bg-[#EAB333] px-5 text-sm font-semibold text-black transition hover:bg-[#D9A21F]"
+                  aria-label="Refresh CAPTCHA"
+                >
+                  <ArrowClockwiseIcon size={32} />
+
+                  Refresh
+                </button>
+              </div>
+
+              {/* CAPTCHA Input */}
+              <input
+                type="text"
+                value={captchaInput}
+                onChange={(e) => {
+                  setCaptchaInput(e.target.value);
+                  setCaptchaError("");
+                }}
+                placeholder="Enter Captcha"
+                autoComplete="off"
+                spellCheck="false"
+                maxLength={6}
+                className={inputClass}
+                aria-label="Enter CAPTCHA code"
+              />
+
+              {/* CAPTCHA Error */}
+              {captchaError && (
+                <p className={errorClass} role="alert">
+                  {captchaError}
+                </p>
               )}
             </div>
 
