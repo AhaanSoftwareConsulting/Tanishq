@@ -461,8 +461,7 @@ const TermsAndConditions = () => {
 
               <p className="text-[#75685D] text-sm md:text-base leading-8 mb-8">
                 If you have any questions about these Terms & Conditions,
-                please feel free to contact us. Our team will be happy
-                to assist you.
+                please feel free to contact us. 
               </p>
 
               <h3 className="font-[Fraunces] text-2xl text-[#2F2116] mb-6">
@@ -539,8 +538,7 @@ const TermsAndConditions = () => {
 
           <p className="max-w-2xl mx-auto text-sm md:text-base text-[#75685D] leading-8 mt-5">
             Thank you for visiting Tanishq Indian Restaurant.
-            We look forward to welcoming you and sharing an
-            unforgettable vegetarian dining experience.
+            We look forward to welcoming you !
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-9">
