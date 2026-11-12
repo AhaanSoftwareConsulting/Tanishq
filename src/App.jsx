@@ -20,6 +20,7 @@ import WhatsAppButton from "./components/layouts/whatsapp/WhatsAppButton";
 
 // Visitor Counter API
 import { trackWebsiteVisit } from "./api/wordpressApi";
+import TermsAndConditions from "./components/pages/policy/TermsAndConditions";
 
 function App() {
   const visitTracked = useRef(false);
@@ -63,6 +64,9 @@ function App() {
         <Route path="/gallery" element={<GalleryComponents />} />
 
         <Route path="/contact" element={<ContactComponents />} />
+
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />}/>
+
       </Routes>
 
       <Footer />
