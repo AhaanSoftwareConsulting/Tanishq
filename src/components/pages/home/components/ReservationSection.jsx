@@ -8,6 +8,25 @@ const ReservationSection = () => {
   const [submitMessage, setSubmitMessage] = useState("");
   const [submitError, setSubmitError] = useState(false);
 
+  // CAPTCHA
+  const generateCaptcha = () => {
+    const characters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+    return Array.from({ length: 6 }, () =>
+      characters[Math.floor(Math.random() * characters.length)]
+    ).join("");
+  };
+
+  const [captchaCode, setCaptchaCode] = useState(generateCaptcha);
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
+
+  const refreshCaptcha = () => {
+    setCaptchaCode(generateCaptcha());
+    setCaptchaInput("");
+    setCaptchaError("");
+  };
+
   const {
     register,
     handleSubmit,
@@ -36,6 +55,18 @@ const ReservationSection = () => {
 
   // Submit reservation to Google Apps Script.
   const onSubmit = async (data) => {
+    // CAPTCHA validation
+    if (
+      captchaInput.trim().toLowerCase() !==
+      captchaCode.toLowerCase()
+    ) {
+      setCaptchaError("Invalid CAPTCHA. Please try again.");
+      setCaptchaCode(generateCaptcha());
+      setCaptchaInput("");
+      return;
+    }
+
+    setCaptchaError("");
     setSubmitMessage("");
     setSubmitError(false);
 
@@ -80,6 +111,10 @@ const ReservationSection = () => {
       );
 
       reset();
+      // Reset CAPTCHA after submission
+      setCaptchaInput("");
+      setCaptchaCode(generateCaptcha());
+      setCaptchaError("");
     } catch (error) {
       console.error("Reservation submission error:", error);
 
@@ -139,9 +174,8 @@ const ReservationSection = () => {
                       message: "Name must contain at least 2 characters.",
                     },
                   })}
-                  className={`${inputClass} ${
-                    errors.name ? "border-red-500" : ""
-                  }`}
+                  className={`${inputClass} ${errors.name ? "border-red-500" : ""
+                    }`}
                 />
 
                 {errors.name && (
@@ -174,9 +208,8 @@ const ReservationSection = () => {
                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
                     },
                   })}
-                  className={`${inputClass} ${
-                    errors.phone ? "border-red-500" : ""
-                  }`}
+                  className={`${inputClass} ${errors.phone ? "border-red-500" : ""
+                    }`}
                 />
 
                 {errors.phone && (
@@ -203,9 +236,8 @@ const ReservationSection = () => {
                       value >= minDate ||
                       "Please select today or a future date.",
                   })}
-                  className={`${inputClass} [color-scheme:light] ${
-                    errors.date ? "border-red-500" : ""
-                  }`}
+                  className={`${inputClass} [color-scheme:light] ${errors.date ? "border-red-500" : ""
+                    }`}
                 />
 
                 {errors.date && (
@@ -236,9 +268,8 @@ const ReservationSection = () => {
                       (Number.isInteger(value) && value >= 1 && value <= 50) ||
                       "Enter a whole number between 1 and 50.",
                   })}
-                  className={`${inputClass} ${
-                    errors.guests ? "border-red-500" : ""
-                  }`}
+                  className={`${inputClass} ${errors.guests ? "border-red-500" : ""
+                    }`}
                 />
 
                 {errors.guests && (
@@ -263,9 +294,8 @@ const ReservationSection = () => {
                       ["ho-chi-minh", "da-nang"].includes(value) ||
                       "Please select a valid restaurant branch.",
                   })}
-                  className={`${inputClass} cursor-pointer [color-scheme:light] ${
-                    errors.branch ? "border-red-500" : ""
-                  }`}
+                  className={`${inputClass} cursor-pointer [color-scheme:light] ${errors.branch ? "border-red-500" : ""
+                    }`}
                 >
                   <option value="">Choose a branch</option>
                   <option value="ho-chi-minh">Ho Chi Minh City</option>
@@ -296,14 +326,103 @@ const ReservationSection = () => {
                     message: "Message cannot exceed 1000 characters.",
                   },
                 })}
-                className={`min-h-[200px] w-full flex-1 resize-y rounded-[12px] border border-transparent bg-[#F5EFE5] px-[22px] py-[20px] font-['Work_Sans'] text-[16px] leading-[1.6] text-[#40372F] outline-none transition-colors duration-300 placeholder:text-[#A69E93] focus:border-[#BD8747] focus:bg-white sm:min-h-[240px] lg:min-h-[280px] ${
-                  errors.message ? "border-red-500" : ""
-                }`}
+                className={`min-h-[200px] w-full flex-1 resize-y rounded-[12px] border border-transparent bg-[#F5EFE5] px-[22px] py-[20px] font-['Work_Sans'] text-[16px] leading-[1.6] text-[#40372F] outline-none transition-colors duration-300 placeholder:text-[#A69E93] focus:border-[#BD8747] focus:bg-white sm:min-h-[240px] lg:min-h-[280px] ${errors.message ? "border-red-500" : ""
+                  }`}
               />
 
               {errors.message && (
                 <p className={errorClass} role="alert">
                   {errors.message.message}
+                </p>
+              )}
+            </div>
+
+            {/* CAPTCHA */}
+            <div className="mt-[30px]">
+              <label
+                htmlFor="captcha-input"
+                className={labelClass}
+              >
+                Security Verification <span className="text-red-500">*</span>
+              </label>
+
+              {/* CAPTCHA Display and Refresh */}
+              <div className="mb-3 flex items-center gap-3">
+
+                {/* CAPTCHA Code */}
+                <div
+                  className="flex h-[56px] min-w-0 flex-1 items-center justify-center gap-1 overflow-hidden rounded-[16px] bg-black px-3 text-xl font-bold tracking-[0.25em] text-white select-none"
+                  aria-label="CAPTCHA code"
+                >
+                  {captchaCode.split("").map((char, index) => (
+                    <span
+                      key={index}
+                      className={
+                        index % 2 === 0
+                          ? "rotate-[-5deg]"
+                          : "rotate-[5deg]"
+                      }
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Refresh Button */}
+                <button
+                  type="button"
+                  onClick={refreshCaptcha}
+                  className="flex h-[56px] shrink-0 items-center justify-center gap-2 rounded-[16px] bg-[#EAB333] px-4 font-['Work_Sans'] text-sm font-semibold text-black transition-colors duration-300 hover:bg-[#D9A21F] sm:px-5"
+                  aria-label="Refresh CAPTCHA"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0118 6l2 3M18.5 15A7 7 0 016 18l-2-3"
+                    />
+                  </svg>
+
+                  Refresh
+                </button>
+              </div>
+
+              {/* CAPTCHA Input */}
+              <input
+                id="captcha-input"
+                type="text"
+                value={captchaInput}
+                onChange={(e) => {
+                  setCaptchaInput(e.target.value);
+                  setCaptchaError("");
+                }}
+                placeholder="Enter Captcha"
+                autoComplete="off"
+                spellCheck="false"
+                maxLength={6}
+                className={`${inputClass} ${captchaError ? "border-red-500" : ""
+                  }`}
+                aria-invalid={Boolean(captchaError)}
+                aria-describedby={
+                  captchaError ? "captcha-error" : undefined
+                }
+              />
+
+              {/* CAPTCHA Error */}
+              {captchaError && (
+                <p
+                  id="captcha-error"
+                  className={errorClass}
+                  role="alert"
+                >
+                  {captchaError}
                 </p>
               )}
             </div>
@@ -324,9 +443,8 @@ const ReservationSection = () => {
               <p
                 role="status"
                 aria-live="polite"
-                className={`mt-4 font-['Work_Sans'] text-[14px] leading-relaxed ${
-                  submitError ? "text-red-600" : "text-[#70451F]"
-                }`}
+                className={`mt-4 font-['Work_Sans'] text-[14px] leading-relaxed ${submitError ? "text-red-600" : "text-[#70451F]"
+                  }`}
               >
                 {submitMessage}
               </p>
