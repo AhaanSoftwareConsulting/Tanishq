@@ -56,10 +56,7 @@ const ReservationSection = () => {
   // Submit reservation to Google Apps Script.
   const onSubmit = async (data) => {
     // CAPTCHA validation
-    if (
-      captchaInput.trim().toLowerCase() !==
-      captchaCode.toLowerCase()
-    ) {
+    if (captchaInput.trim() !== captchaCode) {
       setCaptchaError("Invalid CAPTCHA. Please try again.");
       setCaptchaCode(generateCaptcha());
       setCaptchaInput("");
