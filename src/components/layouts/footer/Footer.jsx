@@ -15,6 +15,7 @@ const quickLinks = [
   { name: "Gallery", path: "/gallery" },
   { name: "Contact Us", path: "/contact" },
   { name: "Terms & Conditions", path: "/terms-and-conditions" },
+  { name: "Privacy Policy", path: "/privacy-policy" },
 ];
 
 const Footer = () => {
