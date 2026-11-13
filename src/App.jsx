@@ -21,6 +21,7 @@ import WhatsAppButton from "./components/layouts/whatsapp/WhatsAppButton";
 // Visitor Counter API
 import { trackWebsiteVisit } from "./api/wordpressApi";
 import TermsAndConditions from "./components/pages/policy/TermsAndConditions";
+import PrivacyPolicy from "./components/pages/policy/PrivacyPolicy";
 
 function App() {
   const visitTracked = useRef(false);
@@ -66,6 +67,8 @@ function App() {
         <Route path="/contact" element={<ContactComponents />} />
 
         <Route path="/terms-and-conditions" element={<TermsAndConditions />}/>
+
+        <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
 
       </Routes>
 
